@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/privacy_settings"
+        android:title="@string/privacy_settings" />
+    <item
+        android:id="@+id/consent_settings"
+        android:title="@string/consent_settings" />
+</menu>

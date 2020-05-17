@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/consent_center_init_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingBottom="6dp"
+        android:maxLines="24"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        android:alpha="0.6"
+        android:textColor="#000000"
+        android:text="@string/consent_init_text"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/button_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_consent_init_skip"
+            android:layout_width="fill_parent"
+            android:layout_height="38dip"
+            android:layout_marginRight="8dip"
+            android:layout_weight="1"
+            android:background="@drawable/emui_button_select"
+            android:text="@string/consent_skip"
+            android:textColor="#cd000000"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_consent_init_yes"
+            android:layout_width="fill_parent"
+            android:layout_height="38dip"
+            android:layout_weight="1"
+            android:background="@drawable/emui_button_select"
+            android:text="@string/consent_yes"
+            android:textColor="#cd000000"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>
