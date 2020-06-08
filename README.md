@@ -55,5 +55,9 @@ Code location: app\src\main\java\com\huawei\hms\ads\sdk\ConsentActivity.java
 Collects user consent on privacy terms.
 Code location: app\src\main\java\com\huawei\hms\ads\sdk\ProtocolActivity.java
 
+## Feedback
+Ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/huawei-ads
+) or the [HUAWEI Developer Forum](https://forums.developer.huawei.com/forumPortal/en/home?fid=0101187876626530001)
+
 ##  License
 hms-ads-demo-java is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
