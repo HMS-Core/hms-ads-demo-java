@@ -119,6 +119,7 @@ public class SplashActivity extends Activity {
 
         // Set a default app launch image.
         splashView.setSloganResId(R.drawable.default_slogan);
+        splashView.setLogo(findViewById(R.id.logo_area));
 
         // Set a logo image.
         splashView.setLogoResId(R.mipmap.ic_launcher);
