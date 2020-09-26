@@ -6,8 +6,8 @@
     tools:context=".SplashActivity">
 
     <RelativeLayout
-        android:id="@+id/logo"
-        android:layout_width="fill_parent"
+        android:id="@+id/logo_area"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="39dp"
+            android:layout_marginBottom="40dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -40,14 +40,14 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:alpha="0.1"
-                    android:background="#000000" />
+                    android:background="@android:color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="1"
                     android:text="@string/owner"
-                    android:textColor="#000000"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -57,7 +57,7 @@
                 android:layout_gravity="center"
                 android:alpha="0.5"
                 android:text="@string/copyright_info"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="8sp" />
         </LinearLayout>
     </RelativeLayout>
@@ -66,6 +66,6 @@
         android:id="@+id/splash_ad_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/logo" />
+        android:layout_above="@id/logo_area" />
 
 </RelativeLayout>
