@@ -53,7 +53,7 @@
     <string name="copyright_info">Copyright 2020. Huawei Technologies Co., Ltd</string>
     <string name="status_ad_dismissed">Splash Ad is dismissed.</string>
 
-     <!--Interstitial ad-->
+    <!--Interstitial ad-->
     <string name="interstitial_title_text">This is interstitial ad sample.</string>
     <string name="image_ad_id">teste9ih9j0rc3</string>
     <string name="video_ad_id">testb4znbuh3n2</string>
@@ -94,7 +94,7 @@
     For more information about our partners and how your data is processed, please touch here.\n\n
     By touching AGREE, you indicate that you agree to share the above personal information with our partners so that they can provide you with personalized advertisements on behalf of their customers, based on interests and preferences identified or predicted through analysis of your personal information.
                                        \n\nYou can withdraw your consent at any time by going to [app settings].
-                                       \n\nIf you touch SKIP, your data will not be shared with our partners and you will not [ ].</string>
+                                       \n\nIf you touch SKIP, your data will not be shared with our partners and you will not receive personalized ads.</string>
     <integer name="init_here_start">347</integer>
     <integer name="init_here_end">351</integer>
     <string name="consent_more_info_text">The Ads in HUAWEI X is provided in collaboration with our partners. You can find a full list of our partners for each country/region here.\n\n
@@ -104,7 +104,7 @@
     •	Service usage information, including news ID and records of views, clicks, dislikes, shares, and comments for news content and advertisements.\n\n
     With your consent, the above information will be shared with our partners so that they can provide you with personalized advertisements on behalf of their customers, based on interests and preferences identified or predicted through analysis of your personal information.\n\n
     You can withdraw your consent at any time by going to app settings.\n\n
-    Without your consent, no data will be shared with our partners and you will not [ ].</string>
+    Without your consent, no data will be shared with our partners and you will not receive personalized ads.</string>
     <integer name="more_info_here_start">133</integer>
     <integer name="more_info_here_end">137</integer>
     <string name="mediation_partners"> You can find a full list of our partners for each country/region here:\n\n</string>
