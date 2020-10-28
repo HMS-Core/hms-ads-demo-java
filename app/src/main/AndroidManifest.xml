@@ -15,6 +15,7 @@
 
         <activity
             android:name=".SplashActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -43,6 +44,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".InterstitialActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InstreamActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|touchscreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

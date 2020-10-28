@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -31,6 +32,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -155,12 +157,6 @@ public class ProtocolDialog extends Dialog {
         final SpannableStringBuilder spanPrivacyInfoText = new SpannableStringBuilder(privacyInfoText);
 
         // Set the listener on the event for tapping some text.
-        ClickableSpan adsAndPrivacyTouchHere = new ClickableSpan() {
-            @Override
-            public void onClick(View widget) {
-                startActivity(ACTION_SIMPLE_PRIVACY);
-            }
-        };
         ClickableSpan personalizedAdsTouchHere = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
@@ -168,20 +164,17 @@ public class ProtocolDialog extends Dialog {
             }
         };
 
-        ForegroundColorSpan colorPrivacy = new ForegroundColorSpan(Color.parseColor("#0000FF"));
-        ForegroundColorSpan colorPersonalize = new ForegroundColorSpan(Color.parseColor("#0000FF"));
-        int privacyTouchHereStart = mContext.getResources().getInteger(R.integer.privacy_start);
-        int privacyTouchHereEnd = mContext.getResources().getInteger(R.integer.privacy_end);
-        int personalizedTouchHereStart = mContext.getResources().getInteger(R.integer.personalized_start);
-        int personalizedTouchHereEnd = mContext.getResources().getInteger(R.integer.personalized_end);
-        spanPrivacyInfoText.setSpan(adsAndPrivacyTouchHere, privacyTouchHereStart, privacyTouchHereEnd,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spanPrivacyInfoText.setSpan(colorPrivacy, privacyTouchHereStart, privacyTouchHereEnd,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spanPrivacyInfoText.setSpan(personalizedAdsTouchHere, personalizedTouchHereStart, personalizedTouchHereEnd,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spanPrivacyInfoText.setSpan(colorPersonalize, personalizedTouchHereStart, personalizedTouchHereEnd,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        int privacyStart = mContext.getResources().getInteger(R.integer.privacy_start);
+        int privacyEnd = mContext.getResources().getInteger(R.integer.privacy_end);
+        StyleSpan privacySpan = new StyleSpan(Typeface.BOLD);
+        spanPrivacyInfoText.setSpan(privacySpan, privacyStart, privacyEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        ForegroundColorSpan colorPersonalize = new ForegroundColorSpan(Color.BLUE);
+        int personalizedStart = mContext.getResources().getInteger(R.integer.personalized_start);
+        int personalizedEnd = mContext.getResources().getInteger(R.integer.personalized_end);
+        spanPrivacyInfoText.setSpan(personalizedAdsTouchHere, personalizedStart, personalizedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanPrivacyInfoText.setSpan(colorPersonalize, personalizedStart, personalizedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         protocolTv.setText(spanPrivacyInfoText);
         protocolTv.setMovementMethod(LinkMovementMethod.getInstance());
     }

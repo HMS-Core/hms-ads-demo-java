@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- 统一设置自定义Dialog样式 -->
+    <!-- Custom Dialog Style -->
     <style name="dialog" parent="@android:style/Theme.Dialog">
         <item name="android:colorForeground">#fff</item>
         <item name="android:windowBackground">@android:color/transparent</item>

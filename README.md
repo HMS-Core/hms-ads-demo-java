@@ -13,17 +13,17 @@
 ## Introduction
 The hms-ads-demo-java program demonstrates how to integrate the HMS Core Ads SDK into an Android app and display ads.
 
-## Installation
-Install the program on Huawei Android mobile phones.
-
 ## Configuration 
 No additional configuration is required.
+
+## Installation
+Install the program on Huawei Android mobile phones.
 
 ## Supported Environments
 HMS Core (APK) 4.0.0 or later has been installed on Huawei Android phones.
 
 ## Sample Code
-The hms-ads-demo-java program integrates the HMS Core Ads SDK and provides the pages for displaying banner, native, rewarded, interstitial, and splash ads, respectively.
+The hms-ads-demo-java program integrates the HMS Core Ads SDK and provides the pages for displaying banner, native, rewarded, interstitial, splash ads, and roll ads respectively.
 The following classes in the demo are used for loading and displaying ads and collecting user comments:
 
 1). BannerActivity.java
@@ -53,6 +53,10 @@ Code location: app\src\main\java\com\huawei\hms\ads\sdk\ConsentActivity.java
 7). ProtocolActivity.java
 Collects user consent on privacy terms.
 Code location: app\src\main\java\com\huawei\hms\ads\sdk\ProtocolActivity.java
+
+8). InstreamActivity.java
+Loads and displays roll ads.
+Code location: app\src\main\java\com\huawei\hms\ads\sdk\InstreamActivity.java
 
 ## Question or issues
 If you want to evaluate more about HMS Core,

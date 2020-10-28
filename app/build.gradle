@@ -29,8 +29,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.huawei.hms:ads-lite:13.4.33.300'
-    implementation 'com.huawei.hms:ads-consent:3.4.33.300'
+    implementation 'com.huawei.hms:ads-lite:13.4.34.300'
+    implementation 'com.huawei.hms:ads-consent:3.4.34.300'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'

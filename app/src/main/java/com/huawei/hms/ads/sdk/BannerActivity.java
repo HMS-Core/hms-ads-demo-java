@@ -182,6 +182,8 @@ public class BannerActivity extends BaseActivity {
             case R.id.size_360_144:
                 adSize = BannerAdSize.BANNER_SIZE_360_144;
                 break;
+            default:
+                break;
         }
         return adSize;
     }
@@ -200,6 +202,8 @@ public class BannerActivity extends BaseActivity {
                 break;
             case R.id.color_transparent:
                 color = Color.TRANSPARENT;
+                break;
+            default:
                 break;
         }
         return color;
