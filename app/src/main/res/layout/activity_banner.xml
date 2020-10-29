@@ -137,7 +137,6 @@
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:text="@string/load_button_text"
-        android:textAlignment="center"
         android:textSize="18sp" />
 
     <FrameLayout
