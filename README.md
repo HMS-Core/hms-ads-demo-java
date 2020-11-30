@@ -60,7 +60,7 @@ Loads and displays roll ads.
 Code location: app\src\main\java\com\huawei\hms\ads\sdk\InstreamActivity.java
 
 ## Result
-<img src="result/Banner.gif" width="200"/>
+<img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Banner.gif" width=200>
 
 ## Question or issues
 If you want to evaluate more about HMS Core,
