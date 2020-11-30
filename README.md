@@ -7,6 +7,7 @@
  * [Configuration ](#configuration)
  * [Supported Environments](#supported-environments)
  * [Sample Code](#sample-code)
+ * [Result](#result)
  * [License](#license)
  
  
@@ -57,6 +58,9 @@ Code location: app\src\main\java\com\huawei\hms\ads\sdk\ProtocolActivity.java
 8). InstreamActivity.java
 Loads and displays roll ads.
 Code location: app\src\main\java\com\huawei\hms\ads\sdk\InstreamActivity.java
+
+## Result
+<img src="Banner.gif" height="422" width="200"/>
 
 ## Question or issues
 If you want to evaluate more about HMS Core,
