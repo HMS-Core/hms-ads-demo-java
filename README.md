@@ -29,38 +29,44 @@ The following classes in the demo are used for loading and displaying ads and co
 
 1). BannerActivity.java
 Loads and displays banner ads.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\BannerActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\BannerActivity.java</br>
     
 2). NativeActivity.java
 Loads and displays native ads.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\NativeActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\NativeActivity.java</br>
     
 3). RewardActivity.java
 Loads and displays rewarded ads.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\RewardActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\RewardActivity.java</br>
 	
 4). InterstitialActivity.java
 Loads and displays interstitial ads.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\InterstitialActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\InterstitialActivity.java</br>
 	
 5). SplashActivity.java
 Loads and displays splash ads.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\SplashActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\SplashActivity.java</br>
 	
 6). ConsentActivity.java
 Collects user consent.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\ConsentActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\ConsentActivity.java</br>
     
 7). ProtocolActivity.java
 Collects user consent on privacy terms.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\ProtocolActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\ProtocolActivity.java</br>
 
 8). InstreamActivity.java
 Loads and displays roll ads.
-Code location: app\src\main\java\com\huawei\hms\ads\sdk\InstreamActivity.java
+<br>Code location: app\src\main\java\com\huawei\hms\ads\sdk\InstreamActivity.java</br>
 
 ## Result
-<img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Banner.gif" width=200>
+Banner Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Interstitial Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Native Ads
+
+ <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Banner.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Interstitial.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Native.gif" width=200>
+
+Reward Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Instream Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Splash Ads
+
+<img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Reward.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Roll.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Splash.gif" width=200>
 
 ## Question or issues
 If you want to evaluate more about HMS Core,
