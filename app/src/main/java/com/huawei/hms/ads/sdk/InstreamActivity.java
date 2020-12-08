@@ -199,7 +199,7 @@ public class InstreamActivity extends BaseActivity {
                 case R.id.instream_load:
                     if (instreamView.isPlaying()) {
                         Toast.makeText(context, getString(R.string.instream_ads_playing), Toast.LENGTH_SHORT).show();
-                    esle if (null != adLoader) {
+                    } esle if (null != adLoader) {
                         initInstreamAdView();
                         loadButton.setText(getString(R.string.instream_loading));
                         adLoader.loadAd(new AdParam.Builder().build());
