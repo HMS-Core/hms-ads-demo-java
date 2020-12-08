@@ -131,6 +131,7 @@ public class InstreamActivity extends BaseActivity {
         @Override
         public void onMediaCompletion(int playTime) {
             updateCountDown(playTime);
+            removeInstream();
             playVideo();
         }
 
