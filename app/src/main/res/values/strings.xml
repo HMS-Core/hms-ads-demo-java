@@ -69,6 +69,7 @@
     <string name="instream_learn_more">Learn more</string>
     <string name="instream_ad_id">testy3cglm3pj0</string>
     <string name="instream_normal_video_playing">Normal video is playing</string>
+    <string name="instream_ads_playing">Instream ads is playing</string>
     <string name="instream_load">Load Ad</string>
     <string name="instream_register">Register</string>
     <string name="instream_mute">Mute</string>
