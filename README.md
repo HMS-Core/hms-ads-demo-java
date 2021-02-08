@@ -14,11 +14,11 @@
 ## Introduction
 The hms-ads-demo-java program demonstrates how to integrate the HMS Core Ads SDK into an Android app and display ads.
 
-## Configuration 
-No additional configuration is required.
-
 ## Installation
 Install the program on Huawei Android mobile phones.
+
+## Configuration 
+No additional configuration is required.
 
 ## Supported Environments
 HMS Core (APK) 4.0.0 or later has been installed on Huawei Android phones.
@@ -70,7 +70,7 @@ Reward Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Instream Ads&emsp;&em
 
 ## Question or issues
 If you want to evaluate more about HMS Core,
-[r/HMSCore on Reddit](https://www.reddit.com/r/HuaweiDevelopers/) is for you to keep up with latest news about HMS Core, and to exchange insights with other developers.
+[HMSCore on Reddit](https://www.reddit.com/r/HuaweiDevelopers/) is for you to keep up with latest news about HMS Core, and to exchange insights with other developers.
 
 If you have questions about how to use HMS samples, try the following options:
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/huawei-mobile-services) is the best place for any programming questions. Be sure to tag your question with 
