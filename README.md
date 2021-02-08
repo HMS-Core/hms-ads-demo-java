@@ -1,5 +1,5 @@
 # HMS Ads Demo for Java
-
+English | [中文](https://github.com/HMS-Core/hms-ads-demo-java/blob/master/README_ZH.md)
 ## Table of Contents
 
  * [Introduction](#introduction)
