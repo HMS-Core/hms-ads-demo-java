@@ -1,4 +1,4 @@
-# HMS Ads Demo for Java
+# 华为广告服务Java示例代码
 中文 | [English](https://github.com/HMS-Core/hms-ads-demo-java/blob/master/README.md)
 ## 目录
 
