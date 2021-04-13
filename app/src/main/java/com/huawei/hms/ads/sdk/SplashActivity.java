@@ -37,7 +37,7 @@ public class SplashActivity extends Activity {
     private static final String TAG = SplashActivity.class.getSimpleName();
 
     // Ad display timeout interval, in milliseconds.
-    private static final int AD_TIMEOUT = 5000;
+    private static final int AD_TIMEOUT = 10000;
 
     // Ad display timeout message flag.
     private static final int MSG_AD_TIMEOUT = 1001;
