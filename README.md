@@ -67,6 +67,7 @@ Banner Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Interstitial Ads&emsp
 Reward Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Instream Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Splash Ads
 
 <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Reward.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Roll.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Splash.gif" width=200>
+<br>You also can use HMS Toolkit to quickly integrate the kit and run the demo project, as well as debug the app using a remote device for free. For details, please visit[HMS Toolkit](https://developer.huawei.com/consumer/cn/doc/development/Tools-Guides/getting-started-0000001077381096)。</br>
 
 ## Question or issues
 If you want to evaluate more about HMS Core,
