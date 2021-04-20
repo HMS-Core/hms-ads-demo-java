@@ -16,7 +16,7 @@ The hms-ads-demo-java program demonstrates how to integrate the HMS Core Ads SDK
 
 ## Installation
 Install the program on Huawei Android mobile phones.
-<br>You also can use HMS Toolkit to quickly integrate the kit and run the demo project, as well as debug the app using a remote device for free. For details, please visit[HMS Toolkit](https://developer.huawei.com/consumer/en/doc/development/Tools-Guides/getting-started-0000001077381096).</br>
+<br>You also can use HMS Toolkit to quickly integrate the kit and run the demo project, as well as debug the app using a remote device for free. For details, please visit [HMS Toolkit](https://developer.huawei.com/consumer/en/doc/development/Tools-Guides/getting-started-0000001077381096).</br>
 
 ## Configuration 
 No additional configuration is required.
