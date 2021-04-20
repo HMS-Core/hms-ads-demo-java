@@ -16,6 +16,7 @@
 
 ## 安装
 在华为手机上安装该示例代码项目。
+<br>该示例也可以通过HMS Toolkit快速启动运行，且支持各Kit一站式集成，并提供远程真机免费调测等功能。了解更多信息，请参见[HMS Toolkit官方链接](https://developer.huawei.com/consumer/cn/doc/development/Tools-Guides/getting-started-0000001077381096)。</br>
 
 ## 配置
 无需配置。
@@ -66,7 +67,6 @@ Banner Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Interstitial Ads&emsp
 Reward Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Instream Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Splash Ads
 
 <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Reward.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Roll.gif" width=200>  <img src="https://github.com/HMS-Core/hms-ads-demo-java/blob/master/result/Splash.gif" width=200>
-<br>该示例也可以通过HMS Toolkit快速启动运行，且支持各Kit一站式集成，并提供远程真机免费调测等功能。了解更多信息，请参见[HMS Toolkit官方链接](https://developer.huawei.com/consumer/cn/doc/development/Tools-Guides/getting-started-0000001077381096)。</br>
 
 ## 技术支持
 如果您对HMS Core还处于评估阶段，可在[Reddit社区](https://www.reddit.com/r/HuaweiDevelopers/)获取关于HMS Core的最新讯息，并与其他开发者交流见解。
