@@ -17,49 +17,35 @@
 package com.huawei.hms.ads.sdk;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huawei.hms.ads.AdListener;
 import com.huawei.hms.ads.AdParam;
-import com.huawei.hms.ads.VideoOperator;
+import com.huawei.hms.ads.VideoConfiguration;
 import com.huawei.hms.ads.nativead.DislikeAdListener;
-import com.huawei.hms.ads.nativead.MediaView;
 import com.huawei.hms.ads.nativead.NativeAd;
 import com.huawei.hms.ads.nativead.NativeAdConfiguration;
 import com.huawei.hms.ads.nativead.NativeAdLoader;
-import com.huawei.hms.ads.nativead.NativeView;
 
 public class NativeActivity extends BaseActivity {
-    private RadioButton small;
-    private RadioButton video;
+    private static final String TAG = NativeActivity.class.getSimpleName();
+
+    private RadioButton bigImage;
+    private RadioButton threeSmall;
+    private RadioButton smallImage;
+    private RadioButton videoWithText;
+    private RadioButton appDownloadBtn;
+
     private Button loadBtn;
     private ScrollView adScrollView;
 
-    private int layoutId;
     private NativeAd globalNativeAd;
-
-    private VideoOperator.VideoLifecycleListener videoLifecycleListener = new VideoOperator.VideoLifecycleListener() {
-        @Override
-        public void onVideoStart() {
-            updateStatus(getString(R.string.status_play_start), false);
-        }
-
-        @Override
-        public void onVideoPlay() {
-            updateStatus(getString(R.string.status_playing), false);
-        }
-
-        @Override
-        public void onVideoEnd() {
-            // If there is a video, load a new native ad only after video playback is complete.
-            updateStatus(getString(R.string.status_play_end), true);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +53,12 @@ public class NativeActivity extends BaseActivity {
         setTitle(getString(R.string.native_ad));
         setContentView(R.layout.activity_native);
 
-        small = findViewById(R.id.radio_button_small);
-        video = findViewById(R.id.radio_button_video);
+        bigImage = findViewById(R.id.radio_button_large);
+        threeSmall = findViewById(R.id.radio_button_three_small);
+        smallImage = findViewById(R.id.radio_button_small);
+        videoWithText = findViewById(R.id.radio_button_video);
+        appDownloadBtn = findViewById(R.id.radio_button_app_download_button);
+
         loadBtn = findViewById(R.id.btn_load);
         adScrollView = findViewById(R.id.scroll_view_ad);
 
@@ -88,15 +78,18 @@ public class NativeActivity extends BaseActivity {
      * @return ad slot ID
      */
     private String getAdId() {
-        String adId;
-        layoutId = R.layout.native_video_template;
-        if (small.isChecked()) {
-            adId = getString(R.string.ad_id_native_small);
-            layoutId = R.layout.native_small_template;
-        } else if (video.isChecked()) {
-            adId = getString(R.string.ad_id_native_video);
-        } else {
+        String adId = getString(R.string.ad_id_native);
+        ;
+        if (bigImage.isChecked()) {
             adId = getString(R.string.ad_id_native);
+        } else if (smallImage.isChecked()) {
+            adId = getString(R.string.ad_id_native_small);
+        } else if (threeSmall.isChecked()) {
+            adId = getString(R.string.ad_id_native_three);
+        } else if (videoWithText.isChecked()) {
+            adId = getString(R.string.ad_id_native_video);
+        } else if (appDownloadBtn.isChecked()) {
+            adId = getString(R.string.ad_id_native_video);
         }
         return adId;
     }
@@ -110,7 +103,6 @@ public class NativeActivity extends BaseActivity {
         updateStatus(null, false);
 
         NativeAdLoader.Builder builder = new NativeAdLoader.Builder(this, adId);
-
         builder.setNativeAdLoadedListener(new NativeAd.NativeAdLoadedListener() {
             @Override
             public void onNativeAdLoaded(NativeAd nativeAd) {
@@ -122,18 +114,27 @@ public class NativeActivity extends BaseActivity {
             }
         }).setAdListener(new AdListener() {
             @Override
+            public void onAdLoaded() {
+                updateStatus(getString(R.string.status_load_ad_finish), true);
+            }
+
+            @Override
             public void onAdFailed(int errorCode) {
                 // Call this method when an ad fails to be loaded.
                 updateStatus(getString(R.string.status_load_ad_fail) + errorCode, true);
             }
         });
 
+        VideoConfiguration videoConfiguration = new VideoConfiguration.Builder()
+                .setStartMuted(true)
+                .build();
+
         NativeAdConfiguration adConfiguration = new NativeAdConfiguration.Builder()
                 .setChoicesPosition(NativeAdConfiguration.ChoicesPosition.BOTTOM_RIGHT) // Set custom attributes.
+                .setVideoConfiguration(videoConfiguration)
                 .build();
 
         NativeAdLoader nativeAdLoader = builder.setNativeAdOptions(adConfiguration).build();
-
         nativeAdLoader.loadAd(new AdParam.Builder().build());
 
         updateStatus(getString(R.string.status_ad_loading), false);
@@ -151,65 +152,51 @@ public class NativeActivity extends BaseActivity {
         }
         globalNativeAd = nativeAd;
 
-        // Obtain NativeView.
-        final NativeView nativeView = (NativeView) getLayoutInflater().inflate(layoutId, null);
+        final View nativeView = createNativeView(nativeAd, adScrollView);
+        if (nativeView != null) {
+            globalNativeAd.setDislikeAdListener(new DislikeAdListener() {
+                @Override
+                public void onAdDisliked() {
+                    // Call this method when an ad is closed.
+                    updateStatus(getString(R.string.ad_is_closed), true);
+                    adScrollView.removeView(nativeView);
+                }
+            });
 
-        // Register and populate a native ad material view.
-        initNativeAdView(globalNativeAd, nativeView);
-        globalNativeAd.setDislikeAdListener(new DislikeAdListener() {
-            @Override
-            public void onAdDisliked() {
-                // Call this method when an ad is closed.
-                updateStatus(getString(R.string.ad_is_closed), true);
-                adScrollView.removeView(nativeView);
-            }
-        });
-
-        // Add NativeView to the app UI.
-        adScrollView.removeAllViews();
-        adScrollView.addView(nativeView);
+            // Add NativeView to the app UI.
+            adScrollView.removeAllViews();
+            adScrollView.addView(nativeView);
+        }
     }
 
     /**
-     * Register and populate a native ad material view.
+     * Create a nativeView by creativeType and fill in ad material.
      *
      * @param nativeAd   native ad object that contains ad materials.
-     * @param nativeView native ad view to be populated into.
+     * @param parentView parent view of nativeView.
      */
-    private void initNativeAdView(NativeAd nativeAd, NativeView nativeView) {
-        // Register a native ad material view.
-        nativeView.setTitleView(nativeView.findViewById(R.id.ad_title));
-        nativeView.setMediaView((MediaView) nativeView.findViewById(R.id.ad_media));
-        nativeView.setAdSourceView(nativeView.findViewById(R.id.ad_source));
-        nativeView.setCallToActionView(nativeView.findViewById(R.id.ad_call_to_action));
-
-        // Populate a native ad material view.
-        ((TextView) nativeView.getTitleView()).setText(nativeAd.getTitle());
-        nativeView.getMediaView().setMediaContent(nativeAd.getMediaContent());
-
-        if (null != nativeAd.getAdSource()) {
-            ((TextView) nativeView.getAdSourceView()).setText(nativeAd.getAdSource());
+    private View createNativeView(NativeAd nativeAd, ViewGroup parentView) {
+        int createType = nativeAd.getCreativeType();
+        Log.i(TAG, "Native ad createType is " + createType);
+        if (createType == 2 || createType == 102) {
+            // Large image
+            return NativeViewFactory.createImageOnlyAdView(nativeAd, parentView);
+        } else if (createType == 3 || createType == 6) {
+            // Large image with text or video with text
+            return NativeViewFactory.createMediumAdView(nativeAd, parentView);
+        } else if (createType == 103 || createType == 106) {
+            // Large image with text or Video with text, using AppDownloadButton template.
+            return NativeViewFactory.createAppDownloadButtonAdView(nativeAd, parentView);
+        } else if (createType == 7 || createType == 107) {
+            // Small image with text-
+            return NativeViewFactory.createSmallImageAdView(nativeAd, parentView);
+        } else if (createType == 8 || createType == 108) {
+            // Three small images with text
+            return NativeViewFactory.createThreeImagesAdView(nativeAd, parentView);
+        } else {
+            // Undefined creative type
+            return null;
         }
-        nativeView.getAdSourceView()
-                .setVisibility(null != nativeAd.getAdSource() ? View.VISIBLE : View.INVISIBLE);
-
-        if (null != nativeAd.getCallToAction()) {
-            ((Button) nativeView.getCallToActionView()).setText(nativeAd.getCallToAction());
-        }
-        nativeView.getCallToActionView()
-                .setVisibility(null != nativeAd.getCallToAction() ? View.VISIBLE : View.INVISIBLE);
-
-        // Obtain a video controller.
-        VideoOperator videoOperator = nativeAd.getVideoOperator();
-
-        // Check whether a native ad contains video materials.
-        if (videoOperator.hasVideo()) {
-            // Add a video lifecycle event listener.
-            videoOperator.setVideoLifecycleListener(videoLifecycleListener);
-        }
-
-        // Register a native ad object.
-        nativeView.setNativeAd(nativeAd);
     }
 
     /**

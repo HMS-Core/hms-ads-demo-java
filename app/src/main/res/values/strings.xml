@@ -27,14 +27,18 @@
     <!-- native ad -->
     <string name="ad_id_native">testu7m3hc4gvm</string>
     <string name="ad_id_native_small">testb65czjivt9</string>
+    <string name="ad_id_native_three">testr6w14o0hqz</string>
     <string name="ad_id_native_video">testy63txaom86</string>
     <string name="ad_flag">Ad</string>
     <string name="display_form">Display form:</string>
-    <string name="large">Large image with text.</string>
-    <string name="small">Small image with text.</string>
-    <string name="video">Video with text.</string>
+    <string name="large_image_with_text">Large image with text.</string>
+    <string name="three_small_images_with_text">Three images with text.</string>
+    <string name="small_image_with_text">Small image with text.</string>
+    <string name="video_with_text">Video with text.</string>
+    <string name="ad_with_app_download_button">Ad with app download button.</string>
     <string name="status_ad_loading">Ad loading state: being loaded.</string>
     <string name="status_load_ad_success">Ad loading state: loaded successfully.</string>
+    <string name="status_load_ad_finish">Ad loading state: loaded finish.</string>
     <string name="status_load_ad_fail">Ad loading state: failed to be loaded. Error code: </string>
     <string name="status_play_start">Video playback state: starting to be played.</string>
     <string name="status_playing">Video playback state: being played.</string>

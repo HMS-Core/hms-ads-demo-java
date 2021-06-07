@@ -37,19 +37,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/large" />
+                    android:text="@string/large_image_with_text" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_three_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/three_small_images_with_text" />
 
                 <RadioButton
                     android:id="@+id/radio_button_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/small" />
+                    android:text="@string/small_image_with_text" />
 
                 <RadioButton
                     android:id="@+id/radio_button_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/video" />
+                    android:text="@string/video_with_text" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_app_download_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ad_with_app_download_button" />
             </RadioGroup>
 
             <Button
@@ -57,7 +69,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="@string/load_button_text" />
         </LinearLayout>
