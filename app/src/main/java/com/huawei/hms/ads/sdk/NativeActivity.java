@@ -132,6 +132,7 @@ public class NativeActivity extends BaseActivity {
         NativeAdConfiguration adConfiguration = new NativeAdConfiguration.Builder()
                 .setChoicesPosition(NativeAdConfiguration.ChoicesPosition.BOTTOM_RIGHT) // Set custom attributes.
                 .setVideoConfiguration(videoConfiguration)
+                .setRequestMultiImages(true)
                 .build();
 
         NativeAdLoader nativeAdLoader = builder.setNativeAdOptions(adConfiguration).build();
