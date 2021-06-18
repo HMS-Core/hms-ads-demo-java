@@ -75,7 +75,6 @@ public class BannerActivity extends BaseActivity {
 
             adFrameLayout.addView(bannerView);
             bannerView.setAdListener(adListener);
-            bannerView.setBannerRefresh(30);
             bannerView.loadAd(new AdParam.Builder().build());
         }
     };
