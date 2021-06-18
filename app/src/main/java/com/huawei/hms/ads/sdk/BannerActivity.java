@@ -36,7 +36,7 @@ import com.huawei.hms.ads.banner.BannerView;
  * Activity for displaying a banner ad.
  */
 public class BannerActivity extends BaseActivity {
-    private static final int REFRESH_TIME = 30;
+    private static final int REFRESH_TIME = 60;
 
     private BannerView bannerView;
 
