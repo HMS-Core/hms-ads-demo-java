@@ -63,22 +63,22 @@ public class InterstitialActivity extends BaseActivity {
         @Override
         public void onAdLoaded() {
             super.onAdLoaded();
-            Toast.makeText(InterstitialActivity.this, "Ad loaded", Toast.LENGTH_SHORT).show();
+            showToast("Ad loaded");
+
             // Display an interstitial ad.
             showInterstitial();
         }
 
         @Override
         public void onAdFailed(int errorCode) {
-            Toast.makeText(InterstitialActivity.this, "Ad load failed with error code: " + errorCode,
-                    Toast.LENGTH_SHORT).show();
+            showToast("Ad load failed with error code: " + errorCode);
             Log.d(TAG, "Ad load failed with error code: " + errorCode);
         }
 
         @Override
         public void onAdClosed() {
             super.onAdClosed();
-            Toast.makeText(InterstitialActivity.this, "Ad closed", Toast.LENGTH_SHORT).show();
+            showToast("Ad closed");
             Log.d(TAG, "onAdClosed");
         }
 
@@ -117,7 +117,16 @@ public class InterstitialActivity extends BaseActivity {
         if (interstitialAd != null && interstitialAd.isLoaded()) {
             interstitialAd.show(this);
         } else {
-            Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
+            showToast("Ad did not load");
         }
+    }
+
+    private void showToast(final String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InterstitialActivity.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

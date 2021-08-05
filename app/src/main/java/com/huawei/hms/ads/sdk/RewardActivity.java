@@ -87,15 +87,12 @@ public class RewardActivity extends BaseActivity {
         RewardAdLoadListener rewardAdLoadListener = new RewardAdLoadListener() {
             @Override
             public void onRewardAdFailedToLoad(int errorCode) {
-                Toast
-                    .makeText(RewardActivity.this, "onRewardAdFailedToLoad " + "errorCode is :" + errorCode,
-                        Toast.LENGTH_SHORT)
-                    .show();
+                showToast("onRewardAdFailedToLoad " + "errorCode is :" + errorCode);
             }
 
             @Override
             public void onRewardedLoaded() {
-                Toast.makeText(RewardActivity.this, "onRewardedLoaded", Toast.LENGTH_SHORT).show();
+                showToast("onRewardedLoaded");
             }
         };
 
@@ -110,20 +107,19 @@ public class RewardActivity extends BaseActivity {
             rewardedAd.show(RewardActivity.this, new RewardAdStatusListener() {
                 @Override
                 public void onRewardAdClosed() {
+                    showToast("onRewardAdClosed");
+
                     loadRewardAd();
                 }
 
                 @Override
                 public void onRewardAdFailedToShow(int errorCode) {
-                    Toast
-                        .makeText(RewardActivity.this, "onRewardAdFailedToShow " + "errorCode is :" + errorCode,
-                            Toast.LENGTH_SHORT)
-                        .show();
+                    showToast("onRewardAdFailedToShow " + "errorCode is :" + errorCode);
                 }
 
                 @Override
                 public void onRewardAdOpened() {
-                    Toast.makeText(RewardActivity.this, "onRewardAdOpened", Toast.LENGTH_SHORT).show();
+                    showToast("onRewardAdOpened");
                 }
 
                 @Override
@@ -132,16 +128,22 @@ public class RewardActivity extends BaseActivity {
                     // takes effect on the server. If no reward information is configured, grant a reward based on the
                     // actual scenario.
                     int addScore = reward.getAmount() == 0 ? defaultScore : reward.getAmount();
-                    Toast
-                        .makeText(RewardActivity.this, "Watch video show finished , add " + addScore + " scores",
-                            Toast.LENGTH_SHORT)
-                        .show();
+                    showToast("Watch video show finished , add " + addScore + " scores");
                     score += addScore;
                     setScore(score);
                     loadRewardAd();
                 }
             });
         }
+    }
+
+    private void showToast(final String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(RewardActivity.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
