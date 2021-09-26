@@ -19,6 +19,9 @@ package com.huawei.hms.ads.sdk;
 import android.app.Application;
 
 import com.huawei.hms.ads.HwAds;
+import com.huawei.hms.ads.RequestOptions;
+import com.huawei.hms.ads.UnderAge;
+import com.huawei.hms.ads.consent.constant.ConsentStatus;
 
 public class AdSampleApplication extends Application {
 
@@ -26,7 +29,26 @@ public class AdSampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        updateRequest();
         // Initialize the HUAWEI Ads SDK.
         HwAds.init(this);
+    }
+
+    private void updateRequest() {
+        RequestOptions requestOptions;
+        // Obtain global ad singleton variables and add personalized ad request parameters.
+        if (HwAds.getRequestOptions() == null) {
+            requestOptions = new RequestOptions();
+        } else {
+            requestOptions = HwAds.getRequestOptions();
+        }
+
+        // For non-personalized ads, reset this parameter.
+        requestOptions = requestOptions.toBuilder()
+                .setNonPersonalizedAd(ConsentStatus.NON_PERSONALIZED.getValue())
+                .setTagForUnderAgeOfPromise(UnderAge.PROMISE_TRUE)
+                .setRequestLocation(false)
+                .build();
+        HwAds.setRequestOptions(requestOptions);
     }
 }
