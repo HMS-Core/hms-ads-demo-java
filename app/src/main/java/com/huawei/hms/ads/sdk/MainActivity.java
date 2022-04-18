@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ConsentStatus consentStatus, boolean isNeedConsent, List<AdProvider> adProviders) {
                 Log.i(TAG, "ConsentStatus: " + consentStatus + ", isNeedConsent: " + isNeedConsent);
-                if (isNeedConsent) {
+                if (isNeedConsent && consentStatus == ConsentStatus.UNKNOWN) {
                     if (adProviders != null && adProviders.size() > 0) {
                         adProviderList.addAll(adProviders);
                     }
