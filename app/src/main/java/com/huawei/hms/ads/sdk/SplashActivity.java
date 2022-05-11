@@ -131,9 +131,9 @@ public class SplashActivity extends Activity {
         }
         splashView.setLogo(findViewById(R.id.logo_area));
 
-        // Set a logo image.
+        // Set app icon.
         splashView.setLogoResId(R.mipmap.ic_launcher);
-        // Set logo description.
+        // Set app name.
         splashView.setMediaNameResId(R.string.media_name);
         // Set the audio focus type for a video splash ad.
         splashView.setAudioFocusType(AudioFocusType.NOT_GAIN_AUDIO_FOCUS_WHEN_MUTE);
