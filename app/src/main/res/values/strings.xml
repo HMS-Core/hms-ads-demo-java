@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HuaweiAdsSdk_Demo</string>
+    <string name="app_name">HuaweiAdsSdk Demo</string>
     <string name="banner_ad">Banner Ad</string>
     <string name="native_ad">Native Ad</string>
     <string name="reward_ad">Reward Ad</string>
