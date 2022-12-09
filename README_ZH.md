@@ -25,7 +25,8 @@
 在华为手机上安装HMS Core (APK) 4.0.0及以上版本。
 
 ## 示例代码
-鲸鸿动能广告服务Java示例代码集成了HMS Core Ads SDK，为您提供横幅广告、原生广告、激励广告、插屏广告、开屏广告和贴片广告的展示页面。本示例代码包括以下六个文件，便于您进行广告加载、展示和用户意见征集：
+鲸鸿动能广告服务Java示例代码集成了HMS Core Ads SDK，为您提供横幅广告、原生广告、激励广告、插屏广告、开屏广告和贴片广告的展示页面。
+本示例代码包括以下六个文件，便于您进行广告加载、展示和用户意见征集：
 
 1). BannerActivity.java
 用于加载、展示横幅广告。
@@ -79,5 +80,5 @@ Reward Ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Instream Ads&emsp;&em
 如果您在尝试示例代码中遇到问题，请向仓库提交[issue](https://github.com/HMS-Core/hms-ads-demo-java/issues)，也欢迎您提交[Pull Request](https://github.com/HMS-Core/hms-ads-demo-java/pulls)。
 
 ##  授权许可
-华为广告服务Java示例代码经过 [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0)授权许可。
+鲸鸿动能广告服务Java示例代码经过 [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0)授权许可。
 
