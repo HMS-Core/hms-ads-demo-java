@@ -12,11 +12,12 @@ English | [中文](https://github.com/HMS-Core/hms-ads-demo-java/blob/master/REA
 
 
 ## Introduction
-The Java sample code provided by Ads Kit describes how to display ads by integrating the HUAWEI Ads SDK into your Android app.
+The Java sample code provided by Ads Kit describes how to display ads by integrating the Petal Ads SDK into your Android app.
 
 ## Installation
 Install the sample code on a Huawei phone.
-<br>You can use HMS Toolkit to quickly run the sample code. HMS Toolkit supports one-stop kit integration, and provides functions such as free app debugging on remote real devices. To learn more about HMS Toolkit, please refer to the [HMS Toolkit documentation](https://developer.huawei.com/consumer/en/doc/development/Tools-Guides/getting-started-0000001077381096?ha_source=hms1).</br>
+<br>You can use HMS Toolkit to quickly run the sample code. HMS Toolkit supports one-stop kit integration, and provides functions such as free app debugging on remote real devices. 
+To learn more about HMS Toolkit, please refer to the [HMS Toolkit documentation](https://developer.huawei.com/consumer/en/doc/development/Tools-Guides/getting-started-0000001077381096?ha_source=hms1).</br>
 
 ## Configuration Management
 N/A
@@ -25,7 +26,7 @@ N/A
 Your Huawei phone has HMS Core (APK) 4.0.0 or later installed.
 
 ## Sample Code
-The Java sample code provided by Ads Kit integrates the HUAWEI Ads SDK, which offers a range of ad formats including banner, native, rewarded, interstitial, splash, and roll ads. The sample code contains the following files for you to load and display ads and obtain user consent:
+The Java sample code provided by Ads Kit integrates the Petal Ads SDK, which offers a range of ad formats including banner, native, rewarded, interstitial, splash, and roll ads. The sample code contains the following files for you to load and display ads and obtain user consent:
 
 (1) BannerActivity.java
 Used to load and display banner ads.
