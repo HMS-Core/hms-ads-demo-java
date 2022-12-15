@@ -1,4 +1,4 @@
-﻿# HMS Core Ads Kit Sample Code (Java)
+﻿# Petal Ads Sample Code (Java)
 English | [中文](https://github.com/HMS-Core/hms-ads-demo-java/blob/master/README_ZH.md)
 ## Contents
 
