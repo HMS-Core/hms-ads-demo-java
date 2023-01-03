@@ -26,7 +26,7 @@ public class AdSampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Initialize the HUAWEI Ads SDK.
+        // Initialize the Petal Ads SDK.
         HwAds.init(this);
     }
 }
