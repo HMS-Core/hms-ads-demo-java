@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huawei.hms.ads.AppDownloadButton;
@@ -103,6 +104,12 @@ public class NativeViewFactory {
         nativeView.getCallToActionView()
                 .setVisibility(null != nativeAd.getCallToAction() ? View.VISIBLE : View.INVISIBLE);
 
+        LinearLayout appDetailLayout = adRootView.findViewById(R.id.ad_app_detail_layout);
+        appDetailLayout.setVisibility(nativeAd.getInteractionType() == 2 ? View.VISIBLE : View.GONE);
+        if (nativeAd.getInteractionType() == 2) {
+            setSixElements(parentView.getContext(), adRootView, nativeAd);
+        }
+
         // Register a native ad object.
         nativeView.setNativeAd(nativeAd);
 
@@ -144,10 +151,46 @@ public class NativeViewFactory {
             imageView3.setImageDrawable(nativeAd.getImages().get(2).getDrawable());
         }
 
+        LinearLayout appDetailLayout = adRootView.findViewById(R.id.ad_app_detail_layout);
+        appDetailLayout.setVisibility(nativeAd.getInteractionType() == 2 ? View.VISIBLE : View.GONE);
+        if (nativeAd.getInteractionType() == 2) {
+            setSixElements(parentView.getContext(), adRootView, nativeAd);
+        }
+
         // Register a native ad object.
         nativeView.setNativeAd(nativeAd);
 
         return nativeView;
+    }
+
+    private static void setSixElements(final Context context, View adRootView, final NativeAd nativeAd) {
+        TextView developerView = adRootView.findViewById(R.id.ad_app_developer);
+        TextView appVersionView = adRootView.findViewById(R.id.ad_app_version);
+        developerView.setText(nativeAd.getAppInfo().getDeveloperName());
+        appVersionView.setText(context.getResources().getString(R.string.app_version) + ":" + nativeAd.getAppInfo().getVersionName());
+
+        TextView privacyView = adRootView.findViewById(R.id.ad_privacy);
+        TextView permissionView = adRootView.findViewById(R.id.ad_permission);
+        TextView detailView = adRootView.findViewById(R.id.ad_detail);
+        permissionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nativeAd.getAppInfo().showPermissionPage(context);
+            }
+        });
+
+        privacyView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               nativeAd.getAppInfo().showPrivacyPolicy(context);
+           }
+       });
+        detailView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nativeAd.showAppDetailPage(context);
+            }
+        });
     }
 
     public static View createAppDownloadButtonAdView(NativeAd nativeAd, final ViewGroup parentView) {
@@ -176,6 +219,13 @@ public class NativeViewFactory {
         if (null != nativeAd.getCallToAction()) {
             ((Button) nativeView.getCallToActionView()).setText(nativeAd.getCallToAction());
         }
+
+        LinearLayout appDetailLayout = adRootView.findViewById(R.id.ad_app_detail_layout);
+        appDetailLayout.setVisibility(nativeAd.getInteractionType() == 2 ? View.VISIBLE : View.GONE);
+        if (nativeAd.getInteractionType() == 2) {
+            setSixElements(parentView.getContext(), adRootView, nativeAd);
+        }
+
 
         // Register a native ad object.
         nativeView.setNativeAd(nativeAd);
