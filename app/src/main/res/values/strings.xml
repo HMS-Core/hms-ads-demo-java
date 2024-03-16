@@ -44,6 +44,10 @@
     <string name="status_playing">Video playback state: being played.</string>
     <string name="status_play_end">Video playback state: playback completed.</string>
     <string name="ad_is_closed">Ad is closed.</string>
+    <string name="app_version">Ver</string>
+    <string name="app_detail">Detail</string>
+    <string name="app_privacy">Privacy</string>
+    <string name="app_permission">Permission</string>
 
     <!-- reward ad -->
     <string name="ad_id_reward">testx9dtjwj8hp</string>
