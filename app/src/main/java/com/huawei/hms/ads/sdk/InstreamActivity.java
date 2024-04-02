@@ -48,19 +48,14 @@ public class InstreamActivity extends BaseActivity {
     private static final String TAG = InstreamActivity.class.getSimpleName();
 
     private TextView videoContent;
-    private TextView skipAd;
     private TextView countDown;
     private TextView callToAction;
-
     private Button loadButton;
-    private Button registerButton;
     private Button muteButton;
     private Button pauseButton;
-
     private RelativeLayout instreamContainer;
     private InstreamView instreamView;
     private ImageView whyThisAd;
-
     private Context context;
     private int maxAdDuration;
     private String whyThisAdUrl;
@@ -159,7 +154,7 @@ public class InstreamActivity extends BaseActivity {
         instreamView = new InstreamView(getApplicationContext());
         instreamContainer.addView(instreamView, 0);
         videoContent = findViewById(R.id.instream_video_content);
-        skipAd = findViewById(R.id.instream_skip);
+        TextView skipAd = findViewById(R.id.instream_skip);
         skipAd.setOnClickListener(view -> removeInstream());
 
         countDown = findViewById(R.id.instream_count_down);
@@ -225,7 +220,7 @@ public class InstreamActivity extends BaseActivity {
 
     private void initButtons() {
         loadButton = findViewById(R.id.instream_load);
-        registerButton = findViewById(R.id.instream_register);
+        Button registerButton = findViewById(R.id.instream_register);
         muteButton = findViewById(R.id.instream_mute);
         pauseButton = findViewById(R.id.instream_pause_play);
 
@@ -302,7 +297,7 @@ public class InstreamActivity extends BaseActivity {
     }
 
     private void updateCountDown(long playTime) {
-        final String time = String.valueOf(Math.round((maxAdDuration - playTime) / 1000));
+        final String time = String.valueOf(Math.round((float) (maxAdDuration - playTime) / 1000));
         runOnUiThread(() -> countDown.setText(time + "s"));
     }
 

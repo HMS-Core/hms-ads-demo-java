@@ -34,7 +34,6 @@ public class InterstitialActivity extends BaseActivity {
 
     private static final String TAG = InterstitialActivity.class.getSimpleName();
     private RadioGroup displayRadioGroup;
-    private Button loadAdButton;
     private InterstitialAd interstitialAd;
 
     @Override
@@ -47,7 +46,7 @@ public class InterstitialActivity extends BaseActivity {
         HwAds.init(this);
 
         displayRadioGroup = findViewById(R.id.display_radio_group);
-        loadAdButton = findViewById(R.id.load_ad);
+        Button loadAdButton = findViewById(R.id.load_ad);
         loadAdButton.setOnClickListener(view -> loadInterstitialAd());
 
     }

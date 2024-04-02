@@ -16,6 +16,7 @@
 
 package com.huawei.hms.ads.sdk.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -49,19 +50,7 @@ import java.util.List;
  * Control on consent-related dialog boxes.
  */
 public class ConsentDialog extends Dialog {
-    private Context mContext;
-
-    private LayoutInflater inflater;
-
-    private LinearLayout contentLayout;
-
-    private TextView titleTv;
-
-    private TextView initInfoTv;
-
-    private TextView moreInfoTv;
-
-    private TextView partnersListTv;
+    private final Context mContext;
 
     private View consentDialogView;
 
@@ -71,15 +60,7 @@ public class ConsentDialog extends Dialog {
 
     private View partnersListView;
 
-    private Button consentYesBtn;
-
-    private Button consentNoBtn;
-
-    private Button moreInfoBackBtn;
-
-    private Button partnerListBackBtn;
-
-    private List<AdProvider> madProviders;
+    private final List<AdProvider> mAdProviders;
 
     private ConsentDialogCallback mCallback;
 
@@ -105,7 +86,7 @@ public class ConsentDialog extends Dialog {
         // Customize a dialog box style.
         super(context, R.style.dialog);
         mContext = context;
-        madProviders = adProviders;
+        mAdProviders = adProviders;
     }
 
     /**
@@ -122,13 +103,15 @@ public class ConsentDialog extends Dialog {
         super.onCreate(savedInstanceState);
 
         Window dialogWindow = getWindow();
-        dialogWindow.requestFeature(Window.FEATURE_NO_TITLE);
+        if (dialogWindow != null) {
+            dialogWindow.requestFeature(Window.FEATURE_NO_TITLE);
+        }
 
-        inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         consentDialogView = inflater.inflate(R.layout.dialog_consent, null);
         setContentView(consentDialogView);
 
-        titleTv = findViewById(R.id.consent_dialog_title_text);
+        TextView titleTv = findViewById(R.id.consent_dialog_title_text);
         titleTv.setText(mContext.getString(R.string.consent_title));
 
         initView = inflater.inflate(R.layout.dialog_consent_content, null);
@@ -144,6 +127,7 @@ public class ConsentDialog extends Dialog {
      *
      * @param consentStatus ConsentStatus
      */
+    @SuppressLint("ApplySharedPref")
     private void updateConsentStatus(ConsentStatus consentStatus) {
         // Update the consent status.
         Consent.getInstance(mContext).setConsentStatus(consentStatus);
@@ -175,22 +159,19 @@ public class ConsentDialog extends Dialog {
      * @param rootView rootView
      */
     private void addInitButtonAndLinkClick(@NonNull View rootView) {
-        consentYesBtn = rootView.findViewById(R.id.btn_consent_init_yes);
-        consentYesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-                updateConsentStatus(ConsentStatus.PERSONALIZED);
-            }
+        Button consentYesBtn = rootView.findViewById(R.id.btn_consent_init_yes);
+        consentYesBtn.setOnClickListener(view -> {
+            dismiss();
+            updateConsentStatus(ConsentStatus.PERSONALIZED);
         });
 
-        consentNoBtn = rootView.findViewById(R.id.btn_consent_init_skip);
+        Button consentNoBtn = rootView.findViewById(R.id.btn_consent_init_skip);
         consentNoBtn.setOnClickListener(view -> {
             dismiss();
             updateConsentStatus(ConsentStatus.NON_PERSONALIZED);
         });
 
-        initInfoTv = rootView.findViewById(R.id.consent_center_init_content);
+        TextView initInfoTv = rootView.findViewById(R.id.consent_center_init_content);
         initInfoTv.setMovementMethod(ScrollingMovementMethod.getInstance());
         String initText = mContext.getString(R.string.consent_init_text);
         final SpannableStringBuilder spanInitText = new SpannableStringBuilder(initText);
@@ -227,15 +208,10 @@ public class ConsentDialog extends Dialog {
      *
      * @param rootView rootView
      */
-    private void addMoreInfoButtonAndLinkClick(View rootView) {
-        moreInfoBackBtn = rootView.findViewById(R.id.btn_consent_more_info_back);
-        moreInfoBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showInitConsentInfo();
-            }
-        });
-        moreInfoTv = rootView.findViewById(R.id.consent_center_more_info_content);
+    private void addMoreInfoButtonAndLinkClick(@NonNull View rootView) {
+        Button moreInfoBackBtn = rootView.findViewById(R.id.btn_consent_more_info_back);
+        moreInfoBackBtn.setOnClickListener(v -> showInitConsentInfo());
+        TextView moreInfoTv = rootView.findViewById(R.id.consent_center_more_info_content);
         moreInfoTv.setMovementMethod(ScrollingMovementMethod.getInstance());
         String moreInfoText = mContext.getString(R.string.consent_more_info_text);
         final SpannableStringBuilder spanMoreInfoText = new SpannableStringBuilder(moreInfoText);
@@ -243,7 +219,7 @@ public class ConsentDialog extends Dialog {
         // Set the listener on the event for tapping some text.
         ClickableSpan moreInfoTouchHere = new ClickableSpan() {
             @Override
-            public void onClick(View widget) {
+            public void onClick(@NonNull View widget) {
                 showPartnersListInfo();
             }
         };
@@ -262,10 +238,10 @@ public class ConsentDialog extends Dialog {
      * Display the partner list page.
      */
     private void showPartnersListInfo() {
-        partnersListTv = partnersListView.findViewById(R.id.partners_list_content);
+        TextView partnersListTv = partnersListView.findViewById(R.id.partners_list_content);
         partnersListTv.setMovementMethod(ScrollingMovementMethod.getInstance());
         partnersListTv.setText("");
-        List<AdProvider> learnAdProviders = madProviders;
+        List<AdProvider> learnAdProviders = mAdProviders;
         if (learnAdProviders != null) {
             for (AdProvider learnAdProvider : learnAdProviders) {
                 String link = "<font color='#0000FF'><a href=" + learnAdProvider.getPrivacyPolicyUrl() + ">"
@@ -288,21 +264,16 @@ public class ConsentDialog extends Dialog {
      *
      * @param rootView rootView
      */
-    private void addPartnersListButtonAndLinkClick(View rootView) {
-        partnerListBackBtn = rootView.findViewById(R.id.btn_partners_list_back);
-        partnerListBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTouchHereInfo();
-            }
-        });
+    private void addPartnersListButtonAndLinkClick(@NonNull View rootView) {
+        Button partnerListBackBtn = rootView.findViewById(R.id.btn_partners_list_back);
+        partnerListBackBtn.setOnClickListener(v -> showTouchHereInfo());
     }
 
     /**
      * Add layout content in the dialog box that is displayed.
      */
     private void addContentView(View view) {
-        contentLayout = findViewById(R.id.consent_center_layout);
+        LinearLayout contentLayout = findViewById(R.id.consent_center_layout);
         contentLayout.removeAllViews();
         contentLayout.addView(view);
     }

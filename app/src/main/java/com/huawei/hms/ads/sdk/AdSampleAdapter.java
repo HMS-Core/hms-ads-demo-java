@@ -28,9 +28,9 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 public class AdSampleAdapter extends ArrayAdapter<AdFormat> {
-    private Context mContext;
+    private final Context mContext;
 
-    private int resourceId;
+    private final int resourceId;
 
     public AdSampleAdapter(Context context, int resource, List<AdFormat> formatList) {
         super(context, resource, formatList);
@@ -45,7 +45,7 @@ public class AdSampleAdapter extends ArrayAdapter<AdFormat> {
         TextView title = view.findViewById(android.R.id.text1);
         AdFormat adFormat = getItem(position);
         if (adFormat != null) {
-            title.setText(adFormat.getTitle());
+            title.setText(adFormat.title());
         }
         return view;
     }

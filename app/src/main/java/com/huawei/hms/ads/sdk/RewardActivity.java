@@ -37,13 +37,7 @@ public class RewardActivity extends BaseActivity {
 
     private static final int RANGE = 2;
 
-    private TextView rewardedTitle;
-
     private TextView scoreView;
-
-    private Button reStartButton;
-
-    private Button watchAdButton;
 
     private RewardAd rewardedAd;
 
@@ -57,7 +51,7 @@ public class RewardActivity extends BaseActivity {
         setTitle(getString(R.string.reward_ad));
         setContentView(R.layout.activity_reward);
 
-        rewardedTitle = findViewById(R.id.text_reward);
+        TextView rewardedTitle = findViewById(R.id.text_reward);
         rewardedTitle.setText(R.string.reward_ad_title);
 
         // Load a rewarded ad.
@@ -153,7 +147,7 @@ public class RewardActivity extends BaseActivity {
      * Load the button for watching a rewarded ad.
      */
     private void loadWatchButton() {
-        watchAdButton = findViewById(R.id.show_video_button);
+        Button watchAdButton = findViewById(R.id.show_video_button);
         watchAdButton.setOnClickListener(view -> rewardAdShow());
     }
 
@@ -161,7 +155,7 @@ public class RewardActivity extends BaseActivity {
      * Load the button for starting a game.
      */
     private void loadPlayButton() {
-        reStartButton = findViewById(R.id.play_button);
+        Button reStartButton = findViewById(R.id.play_button);
         reStartButton.setOnClickListener(view -> play());
     }
 

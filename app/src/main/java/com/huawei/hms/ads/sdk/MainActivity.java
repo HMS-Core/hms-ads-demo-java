@@ -43,17 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = MainActivity.class.getSimpleName();
-
     private static final int PROTOCOL_MSG_TYPE = 100;
-
     private static final int CONSENT_MSG_TYPE = 200;
-
     private static final int MSG_DELAY_MS = 1000;
-
-    private ListView listView;
-
-    private List<AdFormat> adFormats = new ArrayList<>();
+    private final List<AdFormat> adFormats = new ArrayList<>();
 
     private final Handler mHandler = new Handler(msg -> {
         if (MainActivity.this.hasWindowFocus()) {
@@ -76,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
         initAdItems();
 
-        listView = findViewById(R.id.item_list_view);
+        ListView listView = findViewById(R.id.item_list_view);
         final AdSampleAdapter adapter =
             new AdSampleAdapter(MainActivity.this, android.R.layout.simple_list_item_1, adFormats);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             AdFormat adFormat = adapter.getItem(position);
             if (adFormat != null) {
-                Intent intent = new Intent(getApplicationContext(), adFormat.getTargetClass());
+                Intent intent = new Intent(getApplicationContext(), adFormat.targetClass());
                 startActivity(intent);
             }
         });
@@ -150,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
+    /** @noinspection SameParameterValue */
     private void sendMessage(int what, int delayMillis) {
         Message msg = Message.obtain();
         msg.what = what;

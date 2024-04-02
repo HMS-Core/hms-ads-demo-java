@@ -16,25 +16,8 @@
 
 package com.huawei.hms.ads.sdk;
 
-
-public class AdFormat {
-
-    /** The items name */
-    private String title;
-
-    /** Target activity's class */
-    private Class<?> targetClass;
-
-    public AdFormat(String title, Class<?> targetClass) {
-        this.title = title;
-        this.targetClass = targetClass;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public Class<?> getTargetClass() {
-        return this.targetClass;
-    }
-}
+/**
+ * @param title       The items name
+ * @param targetClass Target activity's class
+ */
+public record AdFormat(String title, Class<?> targetClass) {}
