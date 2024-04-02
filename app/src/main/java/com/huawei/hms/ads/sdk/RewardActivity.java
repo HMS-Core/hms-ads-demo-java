@@ -19,7 +19,6 @@ package com.huawei.hms.ads.sdk;
 import java.util.Random;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +29,7 @@ import com.huawei.hms.ads.reward.RewardAd;
 import com.huawei.hms.ads.reward.RewardAdLoadListener;
 import com.huawei.hms.ads.reward.RewardAdStatusListener;
 
-/**
- * Activity for displaying a rewarded ad.
- */
+/** Activity for displaying a rewarded ad. */
 public class RewardActivity extends BaseActivity {
     private static final int PLUS_SCORE = 1;
 
@@ -40,13 +37,7 @@ public class RewardActivity extends BaseActivity {
 
     private static final int RANGE = 2;
 
-    private TextView rewardedTitle;
-
     private TextView scoreView;
-
-    private Button reStartButton;
-
-    private Button watchAdButton;
 
     private RewardAd rewardedAd;
 
@@ -60,7 +51,7 @@ public class RewardActivity extends BaseActivity {
         setTitle(getString(R.string.reward_ad));
         setContentView(R.layout.activity_reward);
 
-        rewardedTitle = findViewById(R.id.text_reward);
+        TextView rewardedTitle = findViewById(R.id.text_reward);
         rewardedTitle.setText(R.string.reward_ad_title);
 
         // Load a rewarded ad.
@@ -138,18 +129,15 @@ public class RewardActivity extends BaseActivity {
     }
 
     private void showToast(final String text) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(RewardActivity.this, text, Toast.LENGTH_SHORT).show();
-            }
-        });
+        runOnUiThread(() ->
+                Toast.makeText(RewardActivity.this, text, Toast.LENGTH_SHORT).show()
+        );
     }
 
     /**
      * Set a score.
      *
-     * @param score
+     * @param score the score to set.
      */
     private void setScore(int score) {
         scoreView.setText("Score:" + score);
@@ -159,26 +147,16 @@ public class RewardActivity extends BaseActivity {
      * Load the button for watching a rewarded ad.
      */
     private void loadWatchButton() {
-        watchAdButton = findViewById(R.id.show_video_button);
-        watchAdButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rewardAdShow();
-            }
-        });
+        Button watchAdButton = findViewById(R.id.show_video_button);
+        watchAdButton.setOnClickListener(view -> rewardAdShow());
     }
 
     /**
      * Load the button for starting a game.
      */
     private void loadPlayButton() {
-        reStartButton = findViewById(R.id.play_button);
-        reStartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                play();
-            }
-        });
+        Button reStartButton = findViewById(R.id.play_button);
+        reStartButton.setOnClickListener(view -> play());
     }
 
     private void loadScoreView() {
@@ -204,7 +182,7 @@ public class RewardActivity extends BaseActivity {
             Toast.makeText(RewardActivity.this, "You win！", Toast.LENGTH_SHORT).show();
         } else {
             score -= MINUS_SCORE;
-            score = score < 0 ? 0 : score;
+            score = Math.max(score, 0);
             Toast.makeText(RewardActivity.this, "You lose！", Toast.LENGTH_SHORT).show();
         }
         setScore(score);

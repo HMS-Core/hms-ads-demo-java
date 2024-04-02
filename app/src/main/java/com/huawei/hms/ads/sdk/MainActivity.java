@@ -19,7 +19,6 @@ package com.huawei.hms.ads.sdk;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,8 +26,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -46,33 +43,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = MainActivity.class.getSimpleName();
-
     private static final int PROTOCOL_MSG_TYPE = 100;
-
     private static final int CONSENT_MSG_TYPE = 200;
-
     private static final int MSG_DELAY_MS = 1000;
+    private final List<AdFormat> adFormats = new ArrayList<>();
 
-    private ListView listView;
-
-    private List<AdFormat> adFormats = new ArrayList<>();
-
-    private Handler mHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(@NonNull Message msg) {
-            if (MainActivity.this.hasWindowFocus()) {
-                switch (msg.what) {
-                    case PROTOCOL_MSG_TYPE:
-                        showPrivacyDialog();
-                        break;
-                    case CONSENT_MSG_TYPE:
-                        checkConsentStatus();
-                        break;
-                }
+    private final Handler mHandler = new Handler(msg -> {
+        if (MainActivity.this.hasWindowFocus()) {
+            switch (msg.what) {
+                case PROTOCOL_MSG_TYPE:
+                    showPrivacyDialog();
+                    break;
+                case CONSENT_MSG_TYPE:
+                    checkConsentStatus();
+                    break;
             }
-            return false;
         }
+        return false;
     });
 
     @Override
@@ -82,15 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
         initAdItems();
 
-        listView = findViewById(R.id.item_list_view);
+        ListView listView = findViewById(R.id.item_list_view);
         final AdSampleAdapter adapter =
             new AdSampleAdapter(MainActivity.this, android.R.layout.simple_list_item_1, adFormats);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AdFormat adFormat = adapter.getItem(position);
-                Intent intent = new Intent(getApplicationContext(), adFormat.getTargetClass());
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            AdFormat adFormat = adapter.getItem(position);
+            if (adFormat != null) {
+                Intent intent = new Intent(getApplicationContext(), adFormat.targetClass());
                 startActivity(intent);
             }
         });
@@ -114,24 +102,30 @@ public class MainActivity extends AppCompatActivity {
         // If a user does not agree to the service agreement, the service agreement dialog is displayed.
         if (getPreferences(AdsConstant.SP_PROTOCOL_KEY, AdsConstant.DEFAULT_SP_PROTOCOL_VALUE) == 0) {
             Log.i(TAG, "Show protocol dialog.");
-            ProtocolDialog dialog = new ProtocolDialog(this);
-            dialog.setCallback(new ProtocolDialog.ProtocolDialogCallback() {
-                @Override
-                public void agree() {
-                    sendMessage(CONSENT_MSG_TYPE, MSG_DELAY_MS);
-                }
-
-                @Override
-                public void cancel() {
-                    // if the user selects the CANCEL button, exit application.
-                    finish();
-                }
-            });
-            dialog.setCanceledOnTouchOutside(false);
+            ProtocolDialog dialog = getProtocolDialog();
             dialog.show();
         } else {
             sendMessage(CONSENT_MSG_TYPE, MSG_DELAY_MS);
         }
+    }
+
+    @NonNull
+    private ProtocolDialog getProtocolDialog() {
+        ProtocolDialog dialog = new ProtocolDialog(this);
+        dialog.setCallback(new ProtocolDialog.ProtocolDialogCallback() {
+            @Override
+            public void agree() {
+                sendMessage(CONSENT_MSG_TYPE, MSG_DELAY_MS);
+            }
+
+            @Override
+            public void cancel() {
+                // if the user selects the CANCEL button, exit application.
+                finish();
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
     }
 
     /**
@@ -151,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
+    /** @noinspection SameParameterValue */
     private void sendMessage(int what, int delayMillis) {
         Message msg = Message.obtain();
         msg.what = what;
@@ -165,21 +160,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.privacy_settings:
-                startActivity(new Intent(getApplicationContext(), ProtocolActivity.class));
-                break;
-            case R.id.consent_settings:
-                startActivity(new Intent(getApplicationContext(), ConsentActivity.class));
-                break;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.privacy_settings) {
+            startActivity(new Intent(getApplicationContext(), ProtocolActivity.class));
+        } else if (item.getItemId() == R.id.consent_settings) {
+            startActivity(new Intent(getApplicationContext(), ConsentActivity.class));
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 
     private void checkConsentStatus() {
@@ -192,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(ConsentStatus consentStatus, boolean isNeedConsent, List<AdProvider> adProviders) {
                 Log.i(TAG, "ConsentStatus: " + consentStatus + ", isNeedConsent: " + isNeedConsent);
                 if (isNeedConsent && consentStatus == ConsentStatus.UNKNOWN) {
-                    if (adProviders != null && adProviders.size() > 0) {
+                    if (adProviders != null && !adProviders.isEmpty()) {
                         adProviderList.addAll(adProviders);
                     }
                     showConsentDialog(adProviderList);

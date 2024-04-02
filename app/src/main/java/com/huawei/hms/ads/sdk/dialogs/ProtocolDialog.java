@@ -16,6 +16,7 @@
 
 package com.huawei.hms.ads.sdk.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -47,25 +48,15 @@ import com.huawei.hms.ads.sdk.R;
 
 import java.util.List;
 
-/**
- * Control on privacy-related dialog boxes.
- */
+/** Control on privacy-related dialog boxes. */
 public class ProtocolDialog extends Dialog {
     private static final String ACTION_SIMPLE_PRIVACY = "com.huawei.hms.ppskit.ACTION.SIMPLE_PRIVACY";
 
     private static final String ACTION_OAID_SETTING = "com.huawei.hms.action.OAID_SETTING";
 
-    private Context mContext;
-
-    private TextView titleTv;
+    private final Context mContext;
 
     private TextView protocolTv;
-
-    private Button confirmButton;
-
-    private Button cancelButton;
-
-    private LayoutInflater inflater;
 
     private ProtocolDialogCallback mCallback;
 
@@ -102,13 +93,15 @@ public class ProtocolDialog extends Dialog {
         super.onCreate(savedInstanceState);
 
         Window dialogWindow = getWindow();
-        dialogWindow.requestFeature(Window.FEATURE_NO_TITLE);
+        if (dialogWindow != null) {
+            dialogWindow.requestFeature(Window.FEATURE_NO_TITLE);
+        }
 
-        inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.dialog_protocol, null);
         setContentView(rootView);
 
-        titleTv = findViewById(R.id.uniform_dialog_title);
+        TextView titleTv = findViewById(R.id.uniform_dialog_title);
         titleTv.setText(mContext.getString(R.string.protocol_title));
         protocolTv = findViewById(R.id.protocol_center_content);
 
@@ -121,11 +114,12 @@ public class ProtocolDialog extends Dialog {
      *
      * @param rootView rootView
      */
-    private void initButtonBar(LinearLayout rootView) {
-        confirmButton = rootView.findViewById(R.id.base_okBtn);
+    private void initButtonBar(@NonNull LinearLayout rootView) {
+        Button confirmButton = rootView.findViewById(R.id.base_okBtn);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            @SuppressLint("ApplySharedPref")
+            public void onClick(View view) {
                 SharedPreferences preferences =
                     mContext.getSharedPreferences(AdsConstant.SP_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -138,7 +132,7 @@ public class ProtocolDialog extends Dialog {
             }
         });
 
-        cancelButton = rootView.findViewById(R.id.base_cancelBtn);
+        Button cancelButton = rootView.findViewById(R.id.base_cancelBtn);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

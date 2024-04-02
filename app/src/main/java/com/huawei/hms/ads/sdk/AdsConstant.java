@@ -18,28 +18,18 @@ package com.huawei.hms.ads.sdk;
 
 public class AdsConstant {
 
-    /**
-     * SharedPreferences name.
-     */
+    /** SharedPreferences name. */
     public static final String SP_NAME = "HuaweiAdsSdkSharedPreferences";
 
-    /**
-     * The SP key of protocol.
-     */
+    /** The SP key of protocol. */
     public static final String SP_PROTOCOL_KEY = "protocol";
 
-    /**
-     * The SP key of consent.
-     */
+    /** The SP key of consent. */
     public static final String SP_CONSENT_KEY = "consent";
 
-    /**
-     * The SP default value of protocol.
-     */
+    /** The SP default value of protocol. */
     public static final int DEFAULT_SP_PROTOCOL_VALUE = 0;
 
-    /**
-     * The SP default value of consent.
-     */
+    /** The SP default value of consent. */
     public static final int DEFAULT_SP_CONSENT_VALUE = -1;
 }

@@ -23,12 +23,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class AdSampleAdapter extends ArrayAdapter<AdFormat> {
-    private Context mContext;
+    private final Context mContext;
 
-    private int resourceId;
+    private final int resourceId;
 
     public AdSampleAdapter(Context context, int resource, List<AdFormat> formatList) {
         super(context, resource, formatList);
@@ -36,12 +38,15 @@ public class AdSampleAdapter extends ArrayAdapter<AdFormat> {
         resourceId = resource;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        AdFormat adFormat = getItem(position);
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(resourceId, parent, false);
         TextView title = view.findViewById(android.R.id.text1);
-        title.setText(adFormat.getTitle());
+        AdFormat adFormat = getItem(position);
+        if (adFormat != null) {
+            title.setText(adFormat.title());
+        }
         return view;
     }
 }

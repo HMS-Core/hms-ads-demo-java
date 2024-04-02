@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.huawei.hms.ads.AppDownloadButton;
 import com.huawei.hms.ads.AppDownloadButtonStyle;
 import com.huawei.hms.ads.VideoOperator;
@@ -172,27 +175,12 @@ public class NativeViewFactory {
         TextView privacyView = adRootView.findViewById(R.id.ad_privacy);
         TextView permissionView = adRootView.findViewById(R.id.ad_permission);
         TextView detailView = adRootView.findViewById(R.id.ad_detail);
-        permissionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nativeAd.getAppInfo().showPermissionPage(context);
-            }
-        });
-
-        privacyView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               nativeAd.getAppInfo().showPrivacyPolicy(context);
-           }
-       });
-        detailView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nativeAd.showAppDetailPage(context);
-            }
-        });
+        permissionView.setOnClickListener(view -> nativeAd.getAppInfo().showPermissionPage(context));
+        privacyView.setOnClickListener(view -> nativeAd.getAppInfo().showPrivacyPolicy(context));
+        detailView.setOnClickListener(view -> nativeAd.showAppDetailPage(context));
     }
 
+    @NonNull
     public static View createAppDownloadButtonAdView(NativeAd nativeAd, final ViewGroup parentView) {
         LayoutInflater inflater = LayoutInflater.from(parentView.getContext());
         View adRootView = inflater.inflate(R.layout.native_ad_with_app_download_btn_template, null);
@@ -244,6 +232,7 @@ public class NativeViewFactory {
         return nativeView;
     }
 
+    @NonNull
     public static View createImageOnlyAdView(NativeAd nativeAd, final ViewGroup parentView) {
         LayoutInflater inflater = LayoutInflater.from(parentView.getContext());
         View adRootView = inflater.inflate(R.layout.native_image_only_template, null);
@@ -274,7 +263,7 @@ public class NativeViewFactory {
         public MyAppDownloadStyle(Context context) {
             super(context);
             normalStyle.setTextColor(context.getResources().getColor(R.color.white));
-            normalStyle.setBackground(context.getResources().getDrawable(R.drawable.native_button_rounded_corners_shape));
+            normalStyle.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.native_button_rounded_corners_shape, context.getTheme()));
             processingStyle.setTextColor(context.getResources().getColor(R.color.black));
         }
     }

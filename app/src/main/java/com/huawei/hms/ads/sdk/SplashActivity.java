@@ -16,17 +16,15 @@
 
 package com.huawei.hms.ads.sdk;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.huawei.hms.ads.AdParam;
 import com.huawei.hms.ads.AudioFocusType;
@@ -34,6 +32,7 @@ import com.huawei.hms.ads.splash.SplashAdDisplayListener;
 import com.huawei.hms.ads.splash.SplashView;
 
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends Activity {
     private static final String TAG = SplashActivity.class.getSimpleName();
 
@@ -52,19 +51,14 @@ public class SplashActivity extends Activity {
     private boolean hasPaused = false;
 
     // Callback handler used when the ad display timeout message is received.
-    private Handler timeoutHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(@NonNull Message msg) {
-            if (SplashActivity.this.hasWindowFocus()) {
-                jump();
-            }
-            return false;
-        }
+    private final Handler timeoutHandler = new Handler(msg -> {
+        if (SplashActivity.this.hasWindowFocus()) {jump();}
+        return false;
     });
 
     private SplashView splashView;
 
-    private SplashView.SplashAdLoadListener splashAdLoadListener = new SplashView.SplashAdLoadListener() {
+    private final SplashView.SplashAdLoadListener splashAdLoadListener = new SplashView.SplashAdLoadListener() {
         @Override
         public void onAdLoaded() {
             // Call this method when an ad is successfully loaded.
@@ -89,7 +83,7 @@ public class SplashActivity extends Activity {
         }
     };
 
-    private SplashAdDisplayListener adDisplayListener = new SplashAdDisplayListener() {
+    private final SplashAdDisplayListener adDisplayListener = new SplashAdDisplayListener() {
         @Override
         public void onAdShowed() {
             // Call this method when an ad is displayed.
@@ -107,7 +101,6 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         loadAd();
     }
 
@@ -168,12 +161,7 @@ public class SplashActivity extends Activity {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
 
             Handler mainHandler = new Handler();
-            mainHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    finish();
-                }
-            }, 1000);
+            mainHandler.postDelayed(this::finish, 1000);
         }
     }
 

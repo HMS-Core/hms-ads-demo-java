@@ -29,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.huawei.hms.ads.AdParam;
 import com.huawei.hms.ads.MediaMuteListener;
 import com.huawei.hms.ads.instreamad.InstreamAd;
@@ -46,19 +48,14 @@ public class InstreamActivity extends BaseActivity {
     private static final String TAG = InstreamActivity.class.getSimpleName();
 
     private TextView videoContent;
-    private TextView skipAd;
     private TextView countDown;
     private TextView callToAction;
-
     private Button loadButton;
-    private Button registerButton;
     private Button muteButton;
     private Button pauseButton;
-
     private RelativeLayout instreamContainer;
     private InstreamView instreamView;
     private ImageView whyThisAd;
-
     private Context context;
     private int maxAdDuration;
     private String whyThisAdUrl;
@@ -80,20 +77,17 @@ public class InstreamActivity extends BaseActivity {
         configAdLoader();
     }
 
-    private InstreamMediaChangeListener mediaChangeListener = new InstreamMediaChangeListener() {
+    private final InstreamMediaChangeListener mediaChangeListener = new InstreamMediaChangeListener() {
         @Override
-        public void onSegmentMediaChange(InstreamAd instreamAd) {
+        public void onSegmentMediaChange(@NonNull InstreamAd instreamAd) {
             whyThisAdUrl = null;
             whyThisAdUrl = instreamAd.getWhyThisAd();
             Log.i(TAG, "onSegmentMediaChange, whyThisAd: " + whyThisAdUrl);
             if (!TextUtils.isEmpty(whyThisAdUrl)) {
                 whyThisAd.setVisibility(View.VISIBLE);
-                whyThisAd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(whyThisAdUrl)));
-                    }
-                });
+                whyThisAd.setOnClickListener(view ->
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(whyThisAdUrl)))
+                );
             } else {
                 whyThisAd.setVisibility(View.GONE);
             }
@@ -107,7 +101,7 @@ public class InstreamActivity extends BaseActivity {
         }
     };
 
-    private InstreamMediaStateListener mediaStateListener = new InstreamMediaStateListener() {
+    private final InstreamMediaStateListener mediaStateListener = new InstreamMediaStateListener() {
         @Override
         public void onMediaProgress(int per, int playTime) {
             updateCountDown(playTime);
@@ -141,7 +135,7 @@ public class InstreamActivity extends BaseActivity {
         }
     };
 
-    private MediaMuteListener mediaMuteListener = new MediaMuteListener() {
+    private final MediaMuteListener mediaMuteListener = new MediaMuteListener() {
         @Override
         public void onMute() {
             isMuted = true;
@@ -160,13 +154,8 @@ public class InstreamActivity extends BaseActivity {
         instreamView = new InstreamView(getApplicationContext());
         instreamContainer.addView(instreamView, 0);
         videoContent = findViewById(R.id.instream_video_content);
-        skipAd = findViewById(R.id.instream_skip);
-        skipAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeInstream();
-            }
-        });
+        TextView skipAd = findViewById(R.id.instream_skip);
+        skipAd.setOnClickListener(view -> removeInstream());
 
         countDown = findViewById(R.id.instream_count_down);
         callToAction = findViewById(R.id.instream_call_to_action);
@@ -175,12 +164,9 @@ public class InstreamActivity extends BaseActivity {
         instreamView.setInstreamMediaChangeListener(mediaChangeListener);
         instreamView.setInstreamMediaStateListener(mediaStateListener);
         instreamView.setMediaMuteListener(mediaMuteListener);
-        instreamView.setOnInstreamAdClickListener(new InstreamView.OnInstreamAdClickListener() {
-            @Override
-            public void onClick() {
-                Toast.makeText(context, "instream clicked.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        instreamView.setOnInstreamAdClickListener(() ->
+                Toast.makeText(context, "instream clicked.", Toast.LENGTH_SHORT).show()
+        );
     }
 
     private void removeInstream() {
@@ -193,55 +179,48 @@ public class InstreamActivity extends BaseActivity {
         }
     }
 
-    private View.OnClickListener clickListener = new View.OnClickListener() {
+    private final View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.instream_load:
-                    if (instreamView.isPlaying()) {
-                        Toast.makeText(context, getString(R.string.instream_ads_playing), Toast.LENGTH_SHORT).show();
-                    } else if (null != adLoader) {
-                        initInstreamAdView();
-                        loadButton.setText(getString(R.string.instream_loading));
-                        adLoader.loadAd(new AdParam.Builder().build());
-                    }
-                    break;
-                case R.id.instream_register:
-                    if (null == instreamAds || instreamAds.size() == 0) {
-                        playVideo();
-                    } else if (instreamView.isPlaying()) {
-                        Toast.makeText(context, getString(R.string.instream_ads_playing), Toast.LENGTH_SHORT).show();
-                    } else {
-                        playInstreamAds(instreamAds);
-                    }
-                    break;
-                case R.id.instream_mute:
-                    if (isMuted) {
-                        instreamView.unmute();
-                        muteButton.setText(getString(R.string.instream_mute));
-                    } else {
-                        instreamView.mute();
-                        muteButton.setText(getString(R.string.instream_unmute));
-                    }
-                    break;
-                case R.id.instream_pause_play:
-                    if (instreamView.isPlaying()) {
-                        instreamView.pause();
-                        pauseButton.setText(getString(R.string.instream_play));
-                    } else {
-                        instreamView.play();
-                        pauseButton.setText(getString(R.string.instream_pause));
-                    }
-                    break;
-                default:
-                    break;
+        public void onClick(@NonNull View view) {
+            if (view.getId() == R.id.instream_load) {
+                if (instreamView.isPlaying()) {
+                    Toast.makeText(context, getString(R.string.instream_ads_playing), Toast.LENGTH_SHORT).show();
+                } else if (null != adLoader) {
+                    initInstreamAdView();
+                    loadButton.setText(getString(R.string.instream_loading));
+                    adLoader.loadAd(new AdParam.Builder().build());
+                }
+            } else if (view.getId() == R.id.instream_register) {
+                if (null == instreamAds || instreamAds.isEmpty()) {
+                    playVideo();
+                } else if (instreamView.isPlaying()) {
+                    Toast.makeText(context, getString(R.string.instream_ads_playing), Toast.LENGTH_SHORT).show();
+                } else {
+                    playInstreamAds(instreamAds);
+                }
+            } else if (view.getId() == R.id.instream_mute) {
+                if (isMuted) {
+                    instreamView.unmute();
+                    muteButton.setText(getString(R.string.instream_mute));
+                } else {
+                    instreamView.mute();
+                    muteButton.setText(getString(R.string.instream_unmute));
+                }
+            } else if (view.getId() == R.id.instream_pause_play) {
+                if (instreamView.isPlaying()) {
+                    instreamView.pause();
+                    pauseButton.setText(getString(R.string.instream_play));
+                } else {
+                    instreamView.play();
+                    pauseButton.setText(getString(R.string.instream_pause));
+                }
             }
         }
     };
 
     private void initButtons() {
         loadButton = findViewById(R.id.instream_load);
-        registerButton = findViewById(R.id.instream_register);
+        Button registerButton = findViewById(R.id.instream_register);
         muteButton = findViewById(R.id.instream_mute);
         pauseButton = findViewById(R.id.instream_pause_play);
 
@@ -251,10 +230,10 @@ public class InstreamActivity extends BaseActivity {
         pauseButton.setOnClickListener(clickListener);
     }
 
-    private InstreamAdLoadListener instreamAdLoadListener = new InstreamAdLoadListener() {
+    private final InstreamAdLoadListener instreamAdLoadListener = new InstreamAdLoadListener() {
         @Override
         public void onAdLoaded(final List<InstreamAd> ads) {
-            if (null == ads || ads.size() == 0) {
+            if (null == ads || ads.isEmpty()) {
                 playVideo();
                 return;
             }
@@ -265,7 +244,7 @@ public class InstreamActivity extends BaseActivity {
                     it.remove();
                 }
             }
-            if (ads.size() == 0) {
+            if (ads.isEmpty()) {
                 playVideo();
                 return;
             }
@@ -283,13 +262,13 @@ public class InstreamActivity extends BaseActivity {
         }
     };
 
+    /**
+     * If the maximum total duration is 60 seconds and the maximum number of roll ads is eight,
+     * at most four 15-second roll ads or two 30-second roll ads will be returned.
+     * If the maximum total duration is 120 seconds and the maximum number of roll ads is four,
+     * no more roll ads will be returned after whichever is reached.
+     */
     private void configAdLoader() {
-        /**
-         * if the maximum total duration is 60 seconds and the maximum number of roll ads is eight,
-         * at most four 15-second roll ads or two 30-second roll ads will be returned.
-         * If the maximum total duration is 120 seconds and the maximum number of roll ads is four,
-         * no more roll ads will be returned after whichever is reached.
-         */
         int totalDuration = 60;
         int maxCount = 4;
         InstreamAdLoader.Builder builder = new InstreamAdLoader.Builder(context, getString(R.string.instream_ad_id));
@@ -318,19 +297,14 @@ public class InstreamActivity extends BaseActivity {
     }
 
     private void updateCountDown(long playTime) {
-        final String time = String.valueOf(Math.round((maxAdDuration - playTime) / 1000));
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                countDown.setText(time + "s");
-            }
-        });
+        final String time = String.valueOf(Math.round((float) (maxAdDuration - playTime) / 1000));
+        runOnUiThread(() -> countDown.setText(time + "s"));
     }
 
-    private int getMaxInstreamDuration(List<InstreamAd> ads) {
+    private int getMaxInstreamDuration(@NonNull List<InstreamAd> ads) {
         int duration = 0;
         for (InstreamAd ad : ads) {
-            duration += ad.getDuration();
+            duration += (int) ad.getDuration();
         }
         return duration;
     }

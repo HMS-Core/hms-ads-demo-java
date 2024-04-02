@@ -37,11 +37,8 @@ import com.huawei.hms.ads.sdk.dialogs.ConsentDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-/**
- * Activity for displaying consent.
- */
+/** Activity for displaying ad-consent settings. */
 public class ConsentActivity extends BaseActivity implements ConsentDialog.ConsentDialogCallback {
     private static final String TAG = ConsentActivity.class.getSimpleName();
 
@@ -49,9 +46,7 @@ public class ConsentActivity extends BaseActivity implements ConsentDialog.Conse
 
     private TextView adTypeTv;
 
-    private RequestOptions requestOptions;
-
-    private List<AdProvider> mAdProviders = new ArrayList<AdProvider>();
+    private final List<AdProvider> mAdProviders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +133,7 @@ public class ConsentActivity extends BaseActivity implements ConsentDialog.Conse
         }
 
         // Obtain global ad singleton variables and add personalized ad request parameters.
+        RequestOptions requestOptions;
         if (HwAds.getRequestOptions() == null) {
             requestOptions = new RequestOptions();
         } else {
@@ -159,7 +155,7 @@ public class ConsentActivity extends BaseActivity implements ConsentDialog.Conse
         updateTextViewTips(consentStatus);
     }
 
-    private AdListener adListener = new AdListener() {
+    private final AdListener adListener = new AdListener() {
         @Override
         public void onAdLoaded() {
             // Called when an ad is loaded successfully.
