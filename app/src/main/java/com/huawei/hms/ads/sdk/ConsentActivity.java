@@ -37,11 +37,8 @@ import com.huawei.hms.ads.sdk.dialogs.ConsentDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-/**
- * Activity for displaying consent.
- */
+/** Activity for displaying ad-consent settings. */
 public class ConsentActivity extends BaseActivity implements ConsentDialog.ConsentDialogCallback {
     private static final String TAG = ConsentActivity.class.getSimpleName();
 
@@ -51,7 +48,7 @@ public class ConsentActivity extends BaseActivity implements ConsentDialog.Conse
 
     private RequestOptions requestOptions;
 
-    private List<AdProvider> mAdProviders = new ArrayList<AdProvider>();
+    private List<AdProvider> mAdProviders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

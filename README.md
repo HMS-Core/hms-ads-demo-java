@@ -63,7 +63,7 @@ Used to obtain users' consent on the privacy statement.
 ## Running Result
 Banner ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Interstitial ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Native ads
 
- <img src="/result/Banner.gif" width=200>  <img src="result/Interstitial.gif" width=200>  <img src="result/Native.gif" width=200>
+<img src="/result/Banner.gif" width=200>  <img src="result/Interstitial.gif" width=200>  <img src="result/Native.gif" width=200>
 
 Reward ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Roll ads&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; Splash ads
 

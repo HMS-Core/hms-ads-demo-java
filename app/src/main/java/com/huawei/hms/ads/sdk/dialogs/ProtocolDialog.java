@@ -47,9 +47,7 @@ import com.huawei.hms.ads.sdk.R;
 
 import java.util.List;
 
-/**
- * Control on privacy-related dialog boxes.
- */
+/** Control on privacy-related dialog boxes. */
 public class ProtocolDialog extends Dialog {
     private static final String ACTION_SIMPLE_PRIVACY = "com.huawei.hms.ppskit.ACTION.SIMPLE_PRIVACY";
 

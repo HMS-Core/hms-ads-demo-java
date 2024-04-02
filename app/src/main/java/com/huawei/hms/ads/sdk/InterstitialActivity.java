@@ -18,7 +18,6 @@ package com.huawei.hms.ads.sdk;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -32,11 +31,10 @@ import com.huawei.hms.ads.InterstitialAd;
  * Activity for displaying an interstitial ad.
  */
 public class InterstitialActivity extends BaseActivity {
-    private static final String TAG = InterstitialActivity.class.getSimpleName();
 
+    private static final String TAG = InterstitialActivity.class.getSimpleName();
     private RadioGroup displayRadioGroup;
     private Button loadAdButton;
-
     private InterstitialAd interstitialAd;
 
     @Override
@@ -50,16 +48,11 @@ public class InterstitialActivity extends BaseActivity {
 
         displayRadioGroup = findViewById(R.id.display_radio_group);
         loadAdButton = findViewById(R.id.load_ad);
-        loadAdButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadInterstitialAd();
-            }
-        });
+        loadAdButton.setOnClickListener(view -> loadInterstitialAd());
 
     }
 
-    private AdListener adListener = new AdListener() {
+    private final AdListener adListener = new AdListener() {
         @Override
         public void onAdLoaded() {
             super.onAdLoaded();

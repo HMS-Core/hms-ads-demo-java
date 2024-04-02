@@ -174,23 +174,20 @@ public class ConsentDialog extends Dialog {
      *
      * @param rootView rootView
      */
-    private void addInitButtonAndLinkClick(View rootView) {
+    private void addInitButtonAndLinkClick(@NonNull View rootView) {
         consentYesBtn = rootView.findViewById(R.id.btn_consent_init_yes);
         consentYesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 dismiss();
                 updateConsentStatus(ConsentStatus.PERSONALIZED);
             }
         });
 
         consentNoBtn = rootView.findViewById(R.id.btn_consent_init_skip);
-        consentNoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-                updateConsentStatus(ConsentStatus.NON_PERSONALIZED);
-            }
+        consentNoBtn.setOnClickListener(view -> {
+            dismiss();
+            updateConsentStatus(ConsentStatus.NON_PERSONALIZED);
         });
 
         initInfoTv = rootView.findViewById(R.id.consent_center_init_content);
@@ -201,7 +198,7 @@ public class ConsentDialog extends Dialog {
         // Set the listener on the event for tapping some text.
         ClickableSpan initTouchHere = new ClickableSpan() {
             @Override
-            public void onClick(View widget) {
+            public void onClick(@NonNull View widget) {
                 showTouchHereInfo();
             }
         };

@@ -1,2 +1,23 @@
-include ':app'
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://developer.huawei.com/repo/" }
+        flatDir { dirs 'libs' }
+    }
+}
+
 rootProject.name='HuaweiAdsSdk_Demo'
+
+include ':app'

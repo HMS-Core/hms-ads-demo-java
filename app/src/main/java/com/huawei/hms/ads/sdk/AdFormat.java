@@ -18,15 +18,12 @@ package com.huawei.hms.ads.sdk;
 
 
 public class AdFormat {
-    /**
-     * Item name
-     */
+
+    /** The items name */
     private String title;
 
-    /**
-     * Target activity
-     */
-    private Class targetClass;
+    /** Target activity's class */
+    private Class<?> targetClass;
 
     public AdFormat(String title, Class<?> targetClass) {
         this.title = title;
@@ -34,10 +31,10 @@ public class AdFormat {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
-    public Class getTargetClass() {
-        return targetClass;
+    public Class<?> getTargetClass() {
+        return this.targetClass;
     }
 }

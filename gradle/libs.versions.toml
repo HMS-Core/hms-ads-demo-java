@@ -1,0 +1,31 @@
+[versions]
+android_gradle_plugin     = '8.3.1'
+androidx_appcompat        = '1.6.1'
+androidx_constraintlayout = '2.1.4'
+androidx_test_core        = '1.5.0'
+androidx_test_junit       = '1.1.5'
+androidx_test_rules       = '1.5.0'
+androidx_test_runner      = '1.5.2'
+androidx_test_monitor     = '1.6.1'
+androidx_test_espresso    = "3.5.1"
+huawei_hms_ads_consent    = '3.4.69.302'
+huawei_hms_ads_lite       = '13.4.69.302'
+huawei_hms_ads_omsdk      = '1.3.35'
+junit = '4.13.2'
+
+[plugins]
+android_application       = { id = "com.android.application", version.ref = "android_gradle_plugin" }
+
+[libraries]
+androidx_appcompat        = { module = "androidx.appcompat:appcompat", version.ref = "androidx_appcompat" }
+androidx_constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx_constraintlayout" }
+androidx_test_core        = { module = "androidx.test:core", version.ref = "androidx_test_core" }
+androidx_test_monitor     = { module = "androidx.test:monitor", version.ref = "androidx_test_monitor" }
+androidx_test_junit       = { module = "androidx.test.ext:junit", version.ref = "androidx_test_junit" }
+androidx_test_rules       = { module = "androidx.test:rules", version.ref = "androidx_test_rules" }
+androidx_test_runner      = { module = "androidx.test:runner", version.ref = "androidx_test_runner" }
+androidx_espresso_core    = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx_test_espresso" }
+huawei_hms_ads_consent    = { module = "com.huawei.hms:ads-consent", version.ref = "huawei_hms_ads_consent" }
+huawei_hms_ads_lite       = { module = "com.huawei.hms:ads-lite", version.ref = "huawei_hms_ads_lite" }
+huawei_hms_ads_omsdk      = { module = "com.huawei.hms:ads-omsdk", version.ref = "huawei_hms_ads_omsdk" }
+junit                     = { module = "junit:junit", version.ref = "junit" }

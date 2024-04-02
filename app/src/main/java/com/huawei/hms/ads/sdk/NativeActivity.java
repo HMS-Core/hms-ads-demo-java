@@ -62,12 +62,7 @@ public class NativeActivity extends BaseActivity {
         loadBtn = findViewById(R.id.btn_load);
         adScrollView = findViewById(R.id.scroll_view_ad);
 
-        loadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadAd(getAdId());
-            }
-        });
+        loadBtn.setOnClickListener(view -> loadAd(getAdId()));
 
         loadAd(getAdId());
     }

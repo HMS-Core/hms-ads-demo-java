@@ -18,6 +18,7 @@ package com.huawei.hms.ads.sdk;
 
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -51,7 +52,7 @@ public class BannerActivity extends BaseActivity {
     /**
      * Button tapping event listener.
      */
-    private View.OnClickListener buttonListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             defaultBannerView.setVisibility(View.INVISIBLE);
@@ -82,7 +83,7 @@ public class BannerActivity extends BaseActivity {
     /**
      * Ad listener.
      */
-    private AdListener adListener = new AdListener() {
+    private final AdListener adListener = new AdListener() {
         @Override
         public void onAdLoaded() {
             // Called when an ad is loaded successfully.
@@ -98,7 +99,7 @@ public class BannerActivity extends BaseActivity {
         @Override
         public void onAdOpened() {
             // Called when an ad is opened.
-            showToast(String.format("Ad opened "));
+            showToast("Ad opened");
         }
 
         @Override
@@ -120,6 +121,7 @@ public class BannerActivity extends BaseActivity {
         }
     };
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,49 +164,20 @@ public class BannerActivity extends BaseActivity {
 
     private BannerAdSize getBannerAdSize(int checkedId) {
         BannerAdSize adSize = null;
-        switch (checkedId) {
-            case R.id.size_320_50:
-                adSize = BannerAdSize.BANNER_SIZE_320_50;
-                break;
-            case R.id.size_320_100:
-                adSize = BannerAdSize.BANNER_SIZE_320_100;
-                break;
-            case R.id.size_300_250:
-                adSize = BannerAdSize.BANNER_SIZE_300_250;
-                break;
-            case R.id.size_smart:
-                adSize = BannerAdSize.BANNER_SIZE_SMART;
-                break;
-            case R.id.size_360_57:
-                adSize = BannerAdSize.BANNER_SIZE_360_57;
-                break;
-            case R.id.size_360_144:
-                adSize = BannerAdSize.BANNER_SIZE_360_144;
-                break;
-            default:
-                break;
-        }
+        if (checkedId == R.id.size_320_50) {adSize = BannerAdSize.BANNER_SIZE_320_50;}
+        else if (checkedId == R.id.size_320_100) {adSize = BannerAdSize.BANNER_SIZE_320_100;}
+        else if (checkedId == R.id.size_300_250) {adSize = BannerAdSize.BANNER_SIZE_300_250;}
+        else if (checkedId == R.id.size_smart) {adSize = BannerAdSize.BANNER_SIZE_SMART;}
+        else if (checkedId == R.id.size_360_57) {adSize = BannerAdSize.BANNER_SIZE_360_57;}
+        else if (checkedId == R.id.size_360_144) {adSize = BannerAdSize.BANNER_SIZE_360_144;}
         return adSize;
     }
 
     private int getBannerViewBackground(int checkedId) {
         int color = Color.TRANSPARENT;
-        switch (checkedId) {
-            case R.id.color_white:
-                color = Color.WHITE;
-                break;
-            case R.id.color_black:
-                color = Color.BLACK;
-                break;
-            case R.id.color_red:
-                color = Color.RED;
-                break;
-            case R.id.color_transparent:
-                color = Color.TRANSPARENT;
-                break;
-            default:
-                break;
-        }
+        if (checkedId == R.id.color_white) {color = Color.WHITE;}
+        else if (checkedId == R.id.color_black) {color = Color.BLACK;}
+        else if (checkedId == R.id.color_red) {color = Color.RED;}
         return color;
     }
 }
