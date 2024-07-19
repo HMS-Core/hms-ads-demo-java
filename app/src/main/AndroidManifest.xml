@@ -25,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".BiddingSplashActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
