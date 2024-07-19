@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         adFormats.add(new AdFormat(getString(R.string.reward_ad), RewardActivity.class));
         adFormats.add(new AdFormat(getString(R.string.interstitial_ad), InterstitialActivity.class));
         adFormats.add(new AdFormat(getString(R.string.instream_ad), InstreamActivity.class));
+        adFormats.add(new AdFormat(getString(R.string.bidding_splash_ad), BiddingSplashActivity.class));
     }
 
     /**
