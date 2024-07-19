@@ -6,6 +6,7 @@
     <string name="interstitial_ad">Interstitial Ad</string>
     <string name="instream_ad">Instream Ad</string>
     <string name="privacy_settings">Privacy Settings</string>
+    <string name="bidding_splash_ad">Bidding Splash Ad</string>
     <string name="consent_settings">Consent Settings</string>
     <string name="load_button_text">Load Ad</string>
 
