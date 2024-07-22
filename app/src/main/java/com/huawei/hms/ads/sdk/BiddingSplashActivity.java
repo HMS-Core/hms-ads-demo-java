@@ -111,7 +111,7 @@ public class BiddingSplashActivity extends BaseActivity {
 
     private void showSplashAd() {
         Log.i(TAG, "showSplashAd");
-        SplashView splashView = splashAd.getSplashView();
+        SplashView splashView = getSplashView();
         splashContainer.removeAllViews();
         RelativeLayout.LayoutParams splashParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         splashContainer.addView(splashView, splashParam);
@@ -122,6 +122,25 @@ public class BiddingSplashActivity extends BaseActivity {
         } else {
             Log.i(TAG, "Ad is Empty");
         }
+    }
+
+    private SplashView getSplashView() {
+        SplashView splashView = splashAd.getSplashView();
+        BiddingSplashActivity BiddingSplashActivity = new BiddingSplashActivity();
+        splashView.setAdDisplayListener(new SplashAdDisplayListener(){
+            private WeakReference<BiddingSplashActivity> activityRef = new WeakReference<>(BiddingSplashActivity);
+            @Override
+            public void onAdClick() {
+                BiddingSplashActivity splashActivity = activityRef.get();
+                if (null == splashActivity) {
+                    return;
+                }
+                super.onAdClick();
+                Log.d(TAG, "onAdClick");
+                Toast.makeText(splashActivity.getApplicationContext(), "onAdClick", Toast.LENGTH_LONG).show();
+            }
+        });
+        return splashView;
     }
 
     @Override
