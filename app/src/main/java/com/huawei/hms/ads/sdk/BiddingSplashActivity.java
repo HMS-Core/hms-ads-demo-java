@@ -46,6 +46,9 @@ public class BiddingSplashActivity extends BaseActivity {
 
     private SplashAd splashAd;
 
+    // 返回键标志位 按返回键退出时应用不被重新拉起，但是在展示广告时下拉通知栏仍然需要正常跳转
+    private boolean hasPaused = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // set full screen
@@ -122,16 +125,18 @@ public class BiddingSplashActivity extends BaseActivity {
     }
 
     @Override
+    // 从其他页面回到开屏页面时调用，进入应用
     protected void onRestart() {
-        // 从其他页面回到开屏页面时调用，进入应用
-        Log.d(TAG, "onRestart");
         super.onRestart();
+        Log.d(TAG, "onRestart");
+        hasPaused = false;
         jump();
     }
 
     @Override
     protected void onStop() {
         Log.d(TAG, "onStop");
+        hasPaused = true;
         super.onStop();
     }
 
@@ -198,8 +203,13 @@ public class BiddingSplashActivity extends BaseActivity {
     }
 
     private void jump() {
-        startActivity(new Intent(BiddingSplashActivity.this, MainActivity.class));
-        finish();
+        Log.d(TAG, "jump hasPaused: " + hasPaused);
+        if(!hasPaused) {
+            hasPaused = true;
+            Log.d(TAG, "jump into application");
+            startActivity(new Intent(BiddingSplashActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     private void showMsg(String msg) {
